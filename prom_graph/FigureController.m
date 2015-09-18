@@ -39,7 +39,25 @@ static NSInteger const kNumberOfFigures = 10;
      
     
     Saver *ob = [Saver sharedInstance];
-    ob.result = self.score;
+    
+    NSString *tmp = [NSString stringWithFormat:@"%i",self.score];
+    //[ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+    
+    BOOL flag = NO;
+    for(int i = 0; i< [ob.allNames count]; i++)
+    {
+        if(([[ob.allNames objectAtIndex:i] isEqual:ob.currentName])==YES)
+        {
+            flag = YES;
+        }
+    }
+    if(flag == NO)
+    {
+        [ob.allNames addObject:ob.currentName]; 
+    }
+   
+          [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+    //ob.result = self.score;
     
 }
 

@@ -29,7 +29,7 @@
         self.nScore = [[NSMutableDictionary alloc]initWithCapacity:10];
         
        self.prefs = [NSUserDefaults standardUserDefaults];
-        [self.prefs setInteger:100 forKey:@"Pavlo"];
+        [self.prefs setInteger:100 forKey:@""];
         
     }
     count++;
@@ -41,14 +41,18 @@
 
 - (void) addPlayerName:(NSString*)name
 {
-    static int counter = 0;
-    if(counter == 0){
-        self.playerName = [[NSMutableArray alloc] initWithCapacity:10];
-        self.score = [[NSMutableArray alloc] initWithCapacity:10];
-    }
-    counter++;
-    [self.playerName addObject:name];
-    NSLog(@"%@", [self.playerName objectAtIndex:0]);
+    
+    Saver *SObject = [Saver sharedInstance];
+    
+   
+    
+   
+    
+    [SObject.myScoreRecords setObject:@" " forKey:name];
+     SObject.currentName =name;
+    
+    NSLog(@"%@", SObject.myScoreRecords);
+    
 }
 
 

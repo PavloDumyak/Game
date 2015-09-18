@@ -7,7 +7,7 @@
 //
 
 #import "LeaderTableViewController.h"
-
+#import "Saver.h"
 @interface LeaderTableViewController ()
 
 @end
@@ -31,18 +31,30 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.players count];
+    Saver *SObject = [Saver sharedInstance];
+    return [SObject.myScoreRecords count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Saver *SObject = [Saver sharedInstance];
     
     NSLog(@"%@",self.scores);
     UITableViewCell *cell;
     NSInteger rows = [indexPath row];
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.textLabel.text = [self.players objectAtIndex:rows];
     
+    NSString *tmpResult = [SObject.allNames objectAtIndex:rows];
+    NSString *result = tmpResult;
+    tmpResult = [tmpResult stringByAppendingString:@"-------------------------------"];
+    result=[tmpResult stringByAppendingString:[SObject.myScoreRecords objectForKey: result]];
+    
+    cell.textLabel.text = result;
+    
+    //[SObject.sc objectAtIndex:rows];
+ 
+    
+   
     
     
    self.scoreLable.text = [self.scores objectAtIndex:rows];

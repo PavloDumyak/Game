@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @interface Saver : NSObject
 +(Saver*)sharedInstance;
+-(void)initDictionary;
+-(void)getScoreArray;
 @property int result;
+@property NSUserDefaults* pref;
+@property NSMutableDictionary *myScoreRecords;
+@property  NSString* currentName;
+@property NSMutableArray* allNames;
+
 @end
