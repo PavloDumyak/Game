@@ -24,8 +24,8 @@ static NSInteger const kNumberOfFigures = 10;
 @property (nonatomic, assign) float distance;
 @property (nonatomic, strong) MyCanvas *viewToCompare;
 @property (nonatomic) int score;
-
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *timerForANewFigureEverySecond;
 
 @end
 
@@ -36,13 +36,9 @@ static NSInteger const kNumberOfFigures = 10;
 -(void)viewWillDisappear:(BOOL)animated
 {
     
-     
-    
     Saver *ob = [Saver sharedInstance];
-    
     NSString *tmp = [NSString stringWithFormat:@"%i",self.score];
-    //[ob.myScoreRecords setValue:tmp forKey:ob.currentName];
-    
+
     BOOL flag = NO;
     for(int i = 0; i< [ob.allNames count]; i++)
     {
@@ -51,14 +47,13 @@ static NSInteger const kNumberOfFigures = 10;
             flag = YES;
         }
     }
+    
     if(flag == NO)
     {
         [ob.allNames addObject:ob.currentName]; 
     }
    
-          [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
-    //ob.result = self.score;
-    
+   [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
 }
 
 - (void)viewDidLoad
@@ -78,6 +73,13 @@ static NSInteger const kNumberOfFigures = 10;
                                                   selector:@selector(timerFire)
                                                   userInfo:nil
                                                    repeats:YES];
+    
+    self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                                          target:self
+                                                                        selector:@selector(placeFigure)
+                                                                        userInfo:nil
+                                                                         repeats:YES];
+    
     self.score=0;
 }
 
