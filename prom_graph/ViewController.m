@@ -22,7 +22,20 @@
 
 -(void)viewDidLoad
 {
- 
+    static int count  = 0;
+    
+    if(count == 0)
+    {
+        self.nScore = [[NSMutableDictionary alloc]initWithCapacity:10];
+        
+       self.prefs = [NSUserDefaults standardUserDefaults];
+        [self.prefs setInteger:100 forKey:@"Pavlo"];
+        
+    }
+    count++;
+    
+    NSLog(@"%li", (long)[self.prefs integerForKey:@"Pavlo"]);
+    
    }
 
 

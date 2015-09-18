@@ -13,5 +13,7 @@
 @interface ViewController : UIViewController
 @property  NSMutableArray *playerName;
 @property  NSMutableArray *score;
+@property NSMutableDictionary* nScore;
+@property (nonatomic, assign) NSUserDefaults *prefs;
 @end
 

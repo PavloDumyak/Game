@@ -35,6 +35,9 @@ static NSInteger const kNumberOfFigures = 10;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
+     
+    
     Saver *ob = [Saver sharedInstance];
     ob.result = self.score;
     
@@ -62,6 +65,8 @@ static NSInteger const kNumberOfFigures = 10;
 
 
 
+
+
 - (void)timerFire
 {
     CGFloat distance = 20.0f;
@@ -80,28 +85,46 @@ static NSInteger const kNumberOfFigures = 10;
     [UIView animateWithDuration:0.1 animations:^{
         for (MyCanvas* figure in self.figures)
         {
+            
             if (weakView == nil || (weakView && ![figure isEqual:weakView]))
             {
-                CGFloat diffX = ((float)rand() / (float)RAND_MAX) * distance - distance / 2.0f;
-                CGFloat diffY = ((float)rand() / (float)RAND_MAX) * distance - distance / 2.0f;
-            
-                if(figure.center.x >= viewWidth && diffX > 0)
+                CGPoint currentVector = figure.routeVector;
+                if (figure.center.x + figure.frame.size.width / 2 >= viewWidth)
                 {
-                        diffX *= -1;
+                    currentVector = [self generateVector];
+                    if (currentVector.x > 0)
+                    {
+                        currentVector.x = -currentVector.x;
+                    }
                 }
-                if(figure.center.x <= 50 && diffX < 0)
+                else if (figure.center.x <= figure.frame.size.width / 2)
                 {
-                    diffX *= -1;
+                    currentVector = [self generateVector];
+                    if(currentVector.x < 0)
+                    {
+                        currentVector.x *= -1;
+                    }
                 }
-                if(figure.center.y >= viewHeight && diffY > 0)
+                
+                if (figure.center.y + figure.frame.size.height / 2 >= viewHeight)
                 {
-                    diffY *= -1;
+                    currentVector = [self generateVector];
+                    if(currentVector.y > 0)
+                    {
+                        currentVector.y *= -1;
+                    }
                 }
-                if(figure.center.y <= 100 && diffY < 0)
+                else if (figure.center.y <= 70+figure.frame.size.height / 2)
                 {
-                    diffY *= -1;
+                    currentVector = [self generateVector];
+                    if(currentVector.y < 0)
+                    {
+                        currentVector.y *= -1;
+                    }
                 }
-                figure.center = CGPointMake(figure.center.x + diffX, figure.center.y + diffY);
+                
+                figure.center = CGPointMake(figure.center.x +  currentVector.x, figure.center.y +  currentVector.y);
+                figure.routeVector = currentVector;
             }
         }
     }];
@@ -297,6 +320,21 @@ static NSInteger const kNumberOfFigures = 10;
     }
 }
 
+
+
+-(CGPoint)generateVector
+{
+    CGPoint currentVector;
+    CGFloat distance1 = 35.0f;
+    CGFloat diffX = ((float)rand() / (float)RAND_MAX) * distance1 - distance1 / 2.0f;
+    CGFloat diffY = ((float)rand() / (float)RAND_MAX) * distance1 - distance1 / 2.0f;
+    currentVector = CGPointMake(diffX, diffY);
+    return currentVector;
+}
+
+
+
+
 - (void)placeFigure
 {
 
@@ -317,6 +355,12 @@ static NSInteger const kNumberOfFigures = 10;
         {
             ob = [[MyCanvas alloc] initWithType:MCFigureTypeNAngles: 12: colorStroke: colorFill];
         }
+    
+    
+    
+    ob.routeVector = [self generateVector];
+    
+    
         CGSize size = self.view.frame.size;
         CGFloat figureSize = 50 + ((float)rand() / (float)RAND_MAX);
         

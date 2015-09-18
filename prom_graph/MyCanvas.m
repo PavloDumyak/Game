@@ -16,6 +16,7 @@
 @property (nonatomic, assign) CGFloat firstX;
 @property (nonatomic, assign) CGFloat firstY;
 
+
 - (void)makeCircle:(CGRect)rect;
 - (void)makeTriangle:(CGRect)rect;
 - (void)makeEllipse: (CGRect) rect;
@@ -39,7 +40,7 @@
 @synthesize originSize = _originSize;
 @synthesize firstX = _firstX;
 @synthesize firstY = _firstY;
-
+@synthesize routeVector=_routeVector;
 
 - (instancetype)initWithType:(MCFigureType)typeOfFigure :(MCColorChoise) colorOfStroke :(MCColorChoise) colorOfFill
 {
@@ -208,9 +209,11 @@
     switch (_selectedType) {
         case 0:
             [self makeTriangle:rect];
+           
             break;
         case 1:
             [self makeCircle:rect];
+            
             break;
         case 2:
             [self makeSquare:rect];
@@ -239,6 +242,7 @@
         default:
             break;
     }
+   
 }
 
 - (void)makeCircle:(CGRect)rect

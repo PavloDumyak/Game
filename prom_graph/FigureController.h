@@ -11,3 +11,5 @@
 @interface FigureController : UIViewController
 +(FigureController*)sharedInstance;
 @end
+
+//[[NSUserDefaults standardDefaults] setObject:<dictionary> forKey:kSomeKey]

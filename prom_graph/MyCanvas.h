@@ -44,4 +44,5 @@ typedef NS_ENUM(NSInteger, MCColorChoise)
 @property (nonatomic, assign) MCFigureType selectedType;
 - (instancetype)initWithType:(MCFigureType)typeOfFigure :(MCColorChoise)colorOfStroke :(MCColorChoise)colorOfFill;
 - (instancetype)initWithType :(MCFigureType)typeOfFigure :(NSInteger) number :(MCColorChoise)colorOfStroke :(MCColorChoise)colorOfFill;
+@property (nonatomic) CGPoint routeVector;
 @end
