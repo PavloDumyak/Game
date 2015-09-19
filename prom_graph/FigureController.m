@@ -74,7 +74,7 @@ static NSInteger const kNumberOfFigures = 10;
                                                   userInfo:nil
                                                    repeats:YES];
     
-    self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:0.01
+    self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:2
                                                                           target:self
                                                                         selector:@selector(placeFigure)
                                                                         userInfo:nil
@@ -358,24 +358,13 @@ static NSInteger const kNumberOfFigures = 10;
 - (void)placeFigure
 {
 
-        NSInteger type = ((float)rand() / (float)RAND_MAX) * MCFigureTypeCount;
-        NSInteger colorStroke = ((float)rand() / (float)RAND_MAX) * MCColorChoiseCount;
-        NSInteger colorFill = ((float)rand() / (float)RAND_MAX) * MCColorChoiseCount;
+        NSInteger type = ((float)rand() / (float)RAND_MAX) * MCAnimalTypeCount;
+
         MyCanvas *ob;
     
-        if (type!=4 && type!=9)
-        {
-            ob = [[MyCanvas alloc] initWithType: type:colorStroke: colorFill];
-        }
-        if (type == 4)
-        {
-            ob = [[MyCanvas alloc] initWithType: MCFigureTypeNAngles: 6: colorStroke: colorFill];
-        }
-        if (type == 9)
-        {
-            ob = [[MyCanvas alloc] initWithType:MCFigureTypeNAngles: 12: colorStroke: colorFill];
-        }
-    
+
+            ob = [[MyCanvas alloc] initWithType: type];
+     
     
     
     ob.routeVector = [self generateVector];
@@ -408,7 +397,7 @@ static NSInteger const kNumberOfFigures = 10;
             }
         }
         ob.frame = figureFrame;
-    ob.userInteractionEnabled = NO;
+       ob.userInteractionEnabled = NO;
         [self.figures addObject:ob];
         [self.view addSubview:ob];
 }

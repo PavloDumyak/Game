@@ -8,41 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, MCFigureType)
+typedef NS_ENUM(NSInteger, MCAnimalType)
 {
-    MCFigureTypeTriangle,
-    MCFigureTypeCircle,
-    MCFigureTypeSquare,
-    MCFigureTypeRhomb,
-    MCFigureTypeHexagon,
-    MCFigureTypeEllipse,
-    MCFigureTypeTrapeze,
-    MCFigureTypeSinusoid,
-    MCFigureTypeSmile,
-    MCFigureTypeNAngles,
-    MCFigureTypeCount
+    MCAnimalTypePinkCat,
+    MCAnimalTypeLama,
+    MCAnimalTypeDumbassCat,
+    MCAnimalTypeEnot,
+    MCAnimalTypeCamel,
+    MCAnimalTypeCatCool,
+    MCAnimalTypeDogLion,
+    MCAnimalTypeEagle,
+    MCAnimalTypeFrog,
+    MCAnimalTypeHaski,
+    MCAnimalTypeMouse,
+    MCAnimalTypePanda,
+    MCAnimalTypeCount
 };
 
-typedef NS_ENUM(NSInteger, MCColorChoise)
-{
-    MCColorChoiseBlue,
-    MCColorChoiseYellow,
-    MCColorChoiseGreen,
-    MCColorChoiseRed,
-    MCColorChoiseBlack,
-    MCColorChoiseBrown,
-    MCColorChoisePurple,
-    MCColorChoiseGray,
-    MCColorChoiseOrange,
-    MCColorChoiseCyan,
-    MCColorChoiseClear,
-    MCColorChoiseCount
-    
-};
+
 
 @interface MyCanvas : UIView
-@property (nonatomic, assign) MCFigureType selectedType;
-- (instancetype)initWithType:(MCFigureType)typeOfFigure :(MCColorChoise)colorOfStroke :(MCColorChoise)colorOfFill;
-- (instancetype)initWithType :(MCFigureType)typeOfFigure :(NSInteger) number :(MCColorChoise)colorOfStroke :(MCColorChoise)colorOfFill;
+@property (nonatomic, assign) MCAnimalType selectedType;
+- (instancetype)initWithType:(MCAnimalType)typeOfFigure;;
 @property (nonatomic) CGPoint routeVector;
 @end

@@ -17,8 +17,9 @@
     static Saver* object;
     static dispatch_once_t predicat;
     dispatch_once(&predicat, ^{object = [[Saver alloc]init];
-         [object initDictionary];
+        
     });
+   [object initDictionary];
     
     return object;
 }
@@ -28,12 +29,14 @@
 
 -(void)initDictionary
 {
-    dispatch_once_t predicat;
-    dispatch_once(&predicat, ^{self.myScoreRecords = [[NSMutableDictionary alloc] initWithCapacity:10];
-        
+    static BOOL flag = NO;
+    
+    if(flag==NO){
+        self.myScoreRecords = [[NSMutableDictionary alloc] initWithCapacity:10];
         self.allNames = [[NSMutableArray alloc] initWithCapacity:10];
-        
-       });
+    }
+    flag = YES;
+    
     
 }
 @end
