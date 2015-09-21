@@ -15,7 +15,6 @@
 @property (nonatomic, assign) CGFloat originSize;
 @property (nonatomic, assign) CGFloat firstX;
 @property (nonatomic, assign) CGFloat firstY;
--(void)makeNewAnimal;
 @end
 
 @implementation MyCanvas
@@ -53,7 +52,7 @@
     
     switch (self.selectedType) {
         case 0:
-          image= [UIImage imageNamed:@"CatPinkImage.png"];
+            image= [UIImage imageNamed:@"CatPinkImage.png"];
             break;
         case 1:
               image= [UIImage imageNamed:@"LamaImage.png"];

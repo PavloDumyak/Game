@@ -15,6 +15,7 @@ static NSInteger const kNumberOfFigures = 10;
 @interface FigureController ()
 
 @property (nonatomic, strong)  NSMutableArray *figures;
+@property (nonatomic, strong) NSMutableArray *featuresArray;
 //@property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) CGFloat originSize;
 @property (nonatomic, assign) CGFloat firstX;
@@ -79,8 +80,10 @@ static NSInteger const kNumberOfFigures = 10;
                                                                         selector:@selector(placeFigure)
                                                                         userInfo:nil
                                                                          repeats:YES];
-    
     self.score=0;
+    
+
+    
 }
 
 
@@ -333,6 +336,9 @@ static NSInteger const kNumberOfFigures = 10;
 
 - (void)createFigures
 {
+    SpecialFeatures *SFObject  = [[SpecialFeatures alloc]initFeature:0];
+    [self.featuresArray addObject:SFObject];
+
     self.figures = [[NSMutableArray alloc] init];
     for (int i = 0; i < kNumberOfFigures; ++i)
     {
@@ -359,15 +365,11 @@ static NSInteger const kNumberOfFigures = 10;
 {
 
         NSInteger type = ((float)rand() / (float)RAND_MAX) * MCAnimalTypeCount;
-
-        MyCanvas *ob;
-    
-
-            ob = [[MyCanvas alloc] initWithType: type];
-     
+    MyCanvas *ob;
     
     
-    ob.routeVector = [self generateVector];
+        ob = [[MyCanvas alloc] initWithType: type];
+        ob.routeVector = [self generateVector];
     
     
         CGSize size = self.view.frame.size;

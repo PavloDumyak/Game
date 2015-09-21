@@ -17,6 +17,8 @@
 		25A561F11B9C760C000A5EBC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25A561EF1B9C760C000A5EBC /* LaunchScreen.xib */; };
 		25A561FD1B9C760C000A5EBC /* prom_graphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A561FC1B9C760C000A5EBC /* prom_graphTests.m */; };
 		25A5620B1B9C8073000A5EBC /* MyCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5620A1B9C8073000A5EBC /* MyCanvas.m */; };
+		6D03D2201BB00BBD0069BE41 /* SpecialFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03D21F1BB00BBD0069BE41 /* SpecialFeatures.m */; };
+		6D03D2221BB00F180069BE41 /* toxic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D2211BB00F180069BE41 /* toxic.jpg */; };
 		840C90131BAB05C200DCBACF /* Saver.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C90121BAB05C200DCBACF /* Saver.m */; };
 		84CCE5EA1BADE882002A67CA /* CatImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E61BADE882002A67CA /* CatImage.png */; };
 		84CCE5EB1BADE882002A67CA /* CatPinkImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E71BADE882002A67CA /* CatPinkImage.png */; };
@@ -65,6 +67,9 @@
 		25A561FC1B9C760C000A5EBC /* prom_graphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = prom_graphTests.m; sourceTree = "<group>"; };
 		25A562091B9C8073000A5EBC /* MyCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCanvas.h; sourceTree = "<group>"; };
 		25A5620A1B9C8073000A5EBC /* MyCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCanvas.m; sourceTree = "<group>"; };
+		6D03D21E1BB00BBD0069BE41 /* SpecialFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialFeatures.h; sourceTree = "<group>"; };
+		6D03D21F1BB00BBD0069BE41 /* SpecialFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialFeatures.m; sourceTree = "<group>"; };
+		6D03D2211BB00F180069BE41 /* toxic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = toxic.jpg; path = ../../toxic.jpg; sourceTree = "<group>"; };
 		840C90111BAB05C200DCBACF /* Saver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Saver.h; sourceTree = "<group>"; };
 		840C90121BAB05C200DCBACF /* Saver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Saver.m; sourceTree = "<group>"; };
 		84CCE5E61BADE882002A67CA /* CatImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CatImage.png; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 		25A561DD1B9C760C000A5EBC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D03D2211BB00F180069BE41 /* toxic.jpg */,
 				84EED4E31BAE18A50028D1E2 /* MainLogo.png */,
 				84EED4DF1BAE0F780028D1E2 /* FirstBackground.jpg */,
 				84EED4E11BAE0FA10028D1E2 /* backgroundImage.jpg */,
@@ -207,6 +213,8 @@
 				25A5620A1B9C8073000A5EBC /* MyCanvas.m */,
 				840C90111BAB05C200DCBACF /* Saver.h */,
 				840C90121BAB05C200DCBACF /* Saver.m */,
+				6D03D21E1BB00BBD0069BE41 /* SpecialFeatures.h */,
+				6D03D21F1BB00BBD0069BE41 /* SpecialFeatures.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 				25A561EC1B9C760C000A5EBC /* Main.storyboard in Resources */,
 				84EED4E41BAE18A50028D1E2 /* MainLogo.png in Resources */,
 				25A561F11B9C760C000A5EBC /* LaunchScreen.xib in Resources */,
+				6D03D2221BB00F180069BE41 /* toxic.jpg in Resources */,
 				84CCE5EA1BADE882002A67CA /* CatImage.png in Resources */,
 				84EED4E21BAE0FA10028D1E2 /* backgroundImage.jpg in Resources */,
 				84CCE5EB1BADE882002A67CA /* CatPinkImage.png in Resources */,
@@ -326,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D03D2201BB00BBD0069BE41 /* SpecialFeatures.m in Sources */,
 				25A561E31B9C760C000A5EBC /* AppDelegate.m in Sources */,
 				25A561E01B9C760C000A5EBC /* main.m in Sources */,
 				25A561E91B9C760C000A5EBC /* ViewController.m in Sources */,

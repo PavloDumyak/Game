@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Saver.h"
+#import "SpecialFeatures.h"
 @interface FigureController : UIViewController
 @end
 

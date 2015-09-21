@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MyCanvas.h"
 #import "FigureController.h"
+#import "SpecialFeatures.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *display;
 - (IBAction)beginNewGame:(id)sender;
@@ -35,6 +36,7 @@
     count++;
     
     NSLog(@"%li", (long)[self.prefs integerForKey:@"Pavlo"]);
+
     
    }
 
