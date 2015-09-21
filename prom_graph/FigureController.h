@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Saver.h"
 #import "SpecialFeatures.h"
+#import <AVFoundation/AVFoundation.h>
 @interface FigureController : UIViewController
 @end
 

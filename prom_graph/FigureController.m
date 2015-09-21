@@ -15,8 +15,7 @@ static NSInteger const kNumberOfFigures = 10;
 @interface FigureController ()
 
 @property (nonatomic, strong)  NSMutableArray *figures;
-@property (nonatomic, strong) NSMutableArray *featuresArray;
-//@property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, strong) SpecialFeatures *currentFeature;
 @property (nonatomic, assign) CGFloat originSize;
 @property (nonatomic, assign) CGFloat firstX;
 @property (nonatomic, assign) CGFloat firstY;
@@ -24,9 +23,14 @@ static NSInteger const kNumberOfFigures = 10;
 @property (nonatomic, strong) MyCanvas *chosenView;
 @property (nonatomic, assign) float distance;
 @property (nonatomic, strong) MyCanvas *viewToCompare;
-@property (nonatomic) int score;
+@property (nonatomic) NSInteger score;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSTimer *timerForANewFigureEverySecond;
+@property (nonatomic, strong) NSTimer *timerForFeatureAnimation;
+@property (nonatomic, strong) NSTimer *timerForCreatinfFeature;
+@property (nonatomic, strong) NSTimer *timerExplosive;
+@property (nonatomic, strong) UIView *explosiveBackground;
+@property (weak, nonatomic) IBOutlet UILabel *visualScore;
 
 @end
 
@@ -61,6 +65,7 @@ static NSInteger const kNumberOfFigures = 10;
 {
     [super viewDidLoad];
     [self createFigures];
+    [self createFeature];
     self.distance = 1000000.0;
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]
@@ -80,15 +85,48 @@ static NSInteger const kNumberOfFigures = 10;
                                                                         selector:@selector(placeFigure)
                                                                         userInfo:nil
                                                                          repeats:YES];
+    self.timerForFeatureAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                            target:self
+                                                          selector:@selector(FeaturetimerFire)
+                                                          userInfo:nil
+                                                           repeats:YES];
+    self.timerForCreatinfFeature = [NSTimer scheduledTimerWithTimeInterval:10
+                                                                     target:self
+                                                                   selector:@selector(createFeature)
+                                                                   userInfo:nil
+                                                                    repeats:YES];
     self.score=0;
     
-
     
+}
+
+
+//music
+
+-(void)playMusic:(NSInteger)choice
+{
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+     CFURLRef soundFileURLRef;
+    UInt32 soundID;
+
+    switch(choice)
+    {
+        case 0:
+            soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef)@"chpok", CFSTR("mp3"), NULL);
+            break;
+        case 1:
+            soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef)@"toxic", CFSTR("mp3"), NULL);
+            break;
+    }
+    
+     AudioServicesCreateSystemSoundID(soundFileURLRef, &soundID);
+     AudioServicesPlaySystemSound(soundID);
 }
 
 
 
 
+//All timers
 
 - (void)timerFire
 {
@@ -98,6 +136,22 @@ static NSInteger const kNumberOfFigures = 10;
     CACurrentMediaTime();
     __weak typeof(MyCanvas) *weakView = self.contView;
     [self moveAnimation:distance :viewHeight :viewWidth :weakView];
+ 
+    
+}
+
+
+- (void)FeaturetimerFire
+{
+    //[self.currentFeature removeFromSuperview];
+    //self.currentFeature = nil;
+    CGFloat distance = 20.0f;
+    CGFloat viewHeight = self.view.frame.size.height - 30;
+    CGFloat viewWidth = self.view.frame.size.width - 30;
+    CACurrentMediaTime();
+   __weak typeof(SpecialFeatures) *weakView = self.currentFeature;
+    [self featureAnimation:distance :viewHeight :viewWidth :weakView];
+    
 }
 
 
@@ -153,6 +207,78 @@ static NSInteger const kNumberOfFigures = 10;
     }];
 }
 
+
+
+
+-(void)featureAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(SpecialFeatures*) weakView
+{
+    [UIView animateWithDuration:0.1 animations:^{
+        CGPoint currentVector = self.currentFeature.featureVector;
+        
+                       self.currentFeature.center = CGPointMake(self.currentFeature.center.x +  currentVector.x, self.currentFeature.center.y +  currentVector.y);
+                self.currentFeature.featureVector = currentVector;
+        
+        
+    }];
+}
+
+-(void)changeBackground
+{
+    NSInteger currentBackgroundColor = rand()%4;
+    [self.explosiveBackground removeFromSuperview];
+    self.explosiveBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 600, 800)];
+    self.explosiveBackground.backgroundColor = [UIColor blackColor];
+    switch (currentBackgroundColor)
+    {
+        case 0:
+            self.explosiveBackground.backgroundColor = [UIColor greenColor];
+            break;
+        case 1:
+            self.explosiveBackground.backgroundColor = [UIColor blackColor];
+            break;
+        case 2:
+            self.explosiveBackground.backgroundColor = [UIColor blueColor];
+            break;
+        case 3:
+            self.explosiveBackground.backgroundColor = [UIColor yellowColor];
+            break;
+        case 4:
+            self.explosiveBackground.backgroundColor = [UIColor whiteColor];
+            break;
+    }
+    [self.view addSubview:self.explosiveBackground];
+}
+
+
+-(void)deleteAllAnimals
+{
+    [self playMusic:1];
+    
+    self.score = self.score + [self.figures count];
+    
+    self.timerExplosive = [NSTimer scheduledTimerWithTimeInterval:0.001
+                                                           target:self
+                                                         selector:@selector(changeBackground)
+                                                         userInfo:nil
+                                                          repeats:YES];
+    
+    for(int i = 0; i < [self.figures count]; i++)
+    {
+        [self.figures[i] removeFromSuperview];
+      
+    }
+    for(int i = 0; i < [self.figures count]; i++)
+    {
+        [self.figures removeObjectAtIndex:i];
+        
+    
+    }
+    
+    NSLog(@"%ld",(long)self.score);
+    NSString *tmp = [NSString stringWithFormat:@"%li", (long)self.score];
+   self.visualScore.text = tmp;
+    
+}
 
 
 - (void)handlePan:(UIPanGestureRecognizer*)paramsender
@@ -259,7 +385,9 @@ static NSInteger const kNumberOfFigures = 10;
         [self.contView removeFromSuperview];
         [self.chosenView removeFromSuperview];
         self.score++;
-        NSLog(@"%i",self.score);
+        NSString *tmp = [NSString stringWithFormat:@"%li",(long)self.score];
+        self.visualScore.text = tmp;
+        [self playMusic:0];
         for(int j = 0;j < self.figures.count; j++)
         {
             if ([self.figures[j] isEqual: self.contView] || [self.figures[j] isEqual: self.chosenView])
@@ -294,6 +422,16 @@ static NSInteger const kNumberOfFigures = 10;
     [super touchesBegan:touches withEvent:event];
     
     CGPoint location = [touches.anyObject locationInView:self.view];
+    
+    
+    if(CGRectContainsPoint([self.currentFeature frame], location))
+    {
+        
+        [self deleteAllAnimals];
+        [self.currentFeature removeFromSuperview];
+        self.currentFeature = nil;
+    }
+    
     for(int i = 0; i < self.figures.count; i++)
     {
         if(CGRectContainsPoint([self.figures[i] frame], location))
@@ -334,17 +472,26 @@ static NSInteger const kNumberOfFigures = 10;
     self.distance = 1000000.0;
 }
 
+// Creating figure and features
+
 - (void)createFigures
 {
-    SpecialFeatures *SFObject  = [[SpecialFeatures alloc]initFeature:0];
-    [self.featuresArray addObject:SFObject];
-
+    
     self.figures = [[NSMutableArray alloc] init];
     for (int i = 0; i < kNumberOfFigures; ++i)
     {
         [self placeFigure];
     }
 }
+
+-(void)createFeature
+{
+    [self.currentFeature removeFromSuperview];
+    self.currentFeature = nil;
+    self.currentFeature = [[SpecialFeatures alloc]initFeature:0];
+    [self placeFeature];
+}
+
 
 
 
@@ -359,18 +506,28 @@ static NSInteger const kNumberOfFigures = 10;
 }
 
 
-
+//Placing figure and feature
+-(void)placeFeature
+{
+    self.currentFeature.featureVector = [self generateVector];
+      self.currentFeature.userInteractionEnabled = NO;
+    [self.view addSubview:self.currentFeature];
+}
 
 - (void)placeFigure
 {
 
+    
+    [self.timerExplosive invalidate];
+    [self.explosiveBackground removeFromSuperview];
         NSInteger type = ((float)rand() / (float)RAND_MAX) * MCAnimalTypeCount;
     MyCanvas *ob;
     
     
         ob = [[MyCanvas alloc] initWithType: type];
         ob.routeVector = [self generateVector];
-    
+        self.currentFeature.featureVector = [self generateVector];
+
     
         CGSize size = self.view.frame.size;
         CGFloat figureSize = 50 + ((float)rand() / (float)RAND_MAX);
@@ -402,6 +559,15 @@ static NSInteger const kNumberOfFigures = 10;
        ob.userInteractionEnabled = NO;
         [self.figures addObject:ob];
         [self.view addSubview:ob];
+    [self.view addSubview:self.currentFeature];
+    if([self.figures count]>20)
+    {
+        [self.timer invalidate];
+        [self.timerForANewFigureEverySecond invalidate];
+        [self.timerExplosive invalidate];
+        
+        self.view.userInteractionEnabled = NO;
+    }
 }
 
 @end

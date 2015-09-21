@@ -15,7 +15,7 @@
 
 -(instancetype)initFeature:(SCFeatureType)typeOfFeature
 {
-    if (self = [super initWithFrame:CGRectMake(0, 0, 70, 70)])
+    if (self = [super initWithFrame:CGRectMake(0, 100, 70, 70)])
     {
         self.selectedType = SCFeatureBomb;
     }
