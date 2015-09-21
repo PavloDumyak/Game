@@ -31,6 +31,7 @@ static NSInteger const kNumberOfFigures = 10;
 @property (nonatomic, strong) NSTimer *timerExplosive;
 @property (nonatomic, strong) UIView *explosiveBackground;
 @property (weak, nonatomic) IBOutlet UILabel *visualScore;
+@property (weak, nonatomic) IBOutlet UILabel *gameOverLable;
 
 @end
 
@@ -59,6 +60,10 @@ static NSInteger const kNumberOfFigures = 10;
     }
    
    [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad
@@ -97,6 +102,7 @@ static NSInteger const kNumberOfFigures = 10;
                                                                     repeats:YES];
     self.score=0;
     
+    self.gameOverLable.hidden = YES;
     
 }
 
@@ -116,6 +122,9 @@ static NSInteger const kNumberOfFigures = 10;
             break;
         case 1:
             soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef)@"toxic", CFSTR("mp3"), NULL);
+            break;
+        case 2:
+            soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef)@"fail", CFSTR("mp3"), NULL);
             break;
     }
     
@@ -261,22 +270,23 @@ static NSInteger const kNumberOfFigures = 10;
                                                          selector:@selector(changeBackground)
                                                          userInfo:nil
                                                           repeats:YES];
-    
+    NSLog(@"ANIMALS  %lu", (unsigned long)[self.figures count]);
     for(int i = 0; i < [self.figures count]; i++)
     {
         [self.figures[i] removeFromSuperview];
       
     }
-    for(int i = 0; i < [self.figures count]; i++)
-    {
-        [self.figures removeObjectAtIndex:i];
-        
     
-    }
+    
+        [self.figures removeAllObjects];
+    
+    
     
     NSLog(@"%ld",(long)self.score);
     NSString *tmp = [NSString stringWithFormat:@"%li", (long)self.score];
    self.visualScore.text = tmp;
+    
+    NSLog(@"ANIMALS  %lu", (unsigned long)[self.figures count]);
     
 }
 
@@ -402,6 +412,7 @@ static NSInteger const kNumberOfFigures = 10;
     else if ([self.contView selectedType] != [self.chosenView selectedType] && self.chosenView!=nil && self.contView!=nil)
     {
         [self placeFigure];
+        [self playMusic:2];
         self.contView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         self.contView.layer.shadowOpacity = 0.0f;
         
@@ -560,13 +571,19 @@ static NSInteger const kNumberOfFigures = 10;
         [self.figures addObject:ob];
         [self.view addSubview:ob];
     [self.view addSubview:self.currentFeature];
-    if([self.figures count]>20)
+    
+    if([self.figures count]>12)
     {
+        
         [self.timer invalidate];
         [self.timerForANewFigureEverySecond invalidate];
         [self.timerExplosive invalidate];
+        [self.timerForCreatinfFeature invalidate];
+        [self.timerForFeatureAnimation invalidate];
         
         self.view.userInteractionEnabled = NO;
+        self.gameOverLable.hidden = NO;
+        [self.view bringSubviewToFront:self.gameOverLable];
     }
 }
 

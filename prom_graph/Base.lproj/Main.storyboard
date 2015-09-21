@@ -206,31 +206,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2Ma-Cx-ahU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="backgroundImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2Ma-Cx-ahU">
                                 <rect key="frame" x="16" y="64" width="288" height="480"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-5E-3Im">
-                                <rect key="frame" x="243" y="394" width="42" height="42"/>
+                                <rect key="frame" x="220" y="394" width="42" height="42"/>
                                 <fontDescription key="fontDescription" name="Marion-Bold" family="Marion" pointSize="41"/>
                                 <color key="textColor" red="0.79484296085858586" green="0.09537100301721449" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2c-ek-D75">
+                                <rect key="frame" x="16" y="206" width="288" height="67"/>
+                                <color key="backgroundColor" red="0.74585662159999999" green="0.79484296089999995" blue="0.001586866412" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Marion-Regular" family="Marion" pointSize="41"/>
+                                <color key="textColor" red="0.79484296089999995" green="0.095371003019999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Dle-e7-B0h" firstAttribute="top" secondItem="sqm-5E-3Im" secondAttribute="bottom" id="Bi1-go-4cO"/>
-                            <constraint firstItem="2Ma-Cx-ahU" firstAttribute="trailing" secondItem="r5Q-8i-9MF" secondAttribute="trailingMargin" id="CxL-DO-xco"/>
-                            <constraint firstItem="2Ma-Cx-ahU" firstAttribute="top" secondItem="eJS-Qc-Lf7" secondAttribute="bottom" id="Dv7-zQ-11C"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sqm-5E-3Im" secondAttribute="trailing" constant="19" id="PhL-0S-FVz"/>
-                            <constraint firstItem="2Ma-Cx-ahU" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" id="rG8-yA-2hF"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="2Ma-Cx-ahU" secondAttribute="bottom" constant="-64" id="teD-3d-MUB"/>
-                            <constraint firstItem="sqm-5E-3Im" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" constant="227" id="xDY-pU-1nE"/>
+                            <constraint firstItem="2Ma-Cx-ahU" firstAttribute="top" secondItem="eJS-Qc-Lf7" secondAttribute="bottom" id="63D-6D-NSK"/>
+                            <constraint firstAttribute="trailing" secondItem="2Ma-Cx-ahU" secondAttribute="trailing" constant="16" id="7KX-7h-dPk"/>
+                            <constraint firstItem="a2c-ek-D75" firstAttribute="trailing" secondItem="r5Q-8i-9MF" secondAttribute="trailingMargin" id="Bnr-Aq-bqW"/>
+                            <constraint firstItem="2Ma-Cx-ahU" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leading" constant="16" id="Q5Q-Ni-EkZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sqm-5E-3Im" secondAttribute="trailing" constant="42" id="VLF-kB-GqU"/>
+                            <constraint firstItem="a2c-ek-D75" firstAttribute="top" secondItem="eJS-Qc-Lf7" secondAttribute="bottom" constant="150" id="Wp3-nr-fjf"/>
+                            <constraint firstItem="a2c-ek-D75" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" id="gzd-ge-8jf"/>
+                            <constraint firstItem="sqm-5E-3Im" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" constant="204" id="k5t-AU-WFM"/>
+                            <constraint firstItem="Dle-e7-B0h" firstAttribute="top" secondItem="sqm-5E-3Im" secondAttribute="bottom" id="laj-7j-8wb"/>
+                            <constraint firstAttribute="bottom" secondItem="2Ma-Cx-ahU" secondAttribute="bottom" id="xzU-56-1ps"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="gameOverLable" destination="a2c-ek-D75" id="qCB-A2-QBW"/>
                         <outlet property="visualScore" destination="sqm-5E-3Im" id="Nme-lG-vqO"/>
                     </connections>
                 </viewController>

@@ -24,6 +24,7 @@
 		6D03D2641BB05B980069BE41 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03D2631BB05B980069BE41 /* AVFoundation.framework */; };
 		6D03D2661BB064590069BE41 /* chpok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D2651BB064590069BE41 /* chpok.mp3 */; };
 		6D03D2681BB065600069BE41 /* toxic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D2671BB065600069BE41 /* toxic.mp3 */; };
+		6D03D26A1BB0720B0069BE41 /* fail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D2691BB0720B0069BE41 /* fail.mp3 */; };
 		840C90131BAB05C200DCBACF /* Saver.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C90121BAB05C200DCBACF /* Saver.m */; };
 		84B8D52B1BB023FD00B75ABC /* butIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B8D52A1BB023FD00B75ABC /* butIcon.png */; };
 		84CCE5EA1BADE882002A67CA /* CatImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E61BADE882002A67CA /* CatImage.png */; };
@@ -81,6 +82,7 @@
 		6D03D2631BB05B980069BE41 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6D03D2651BB064590069BE41 /* chpok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chpok.mp3; sourceTree = "<group>"; };
 		6D03D2671BB065600069BE41 /* toxic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = toxic.mp3; sourceTree = "<group>"; };
+		6D03D2691BB0720B0069BE41 /* fail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fail.mp3; sourceTree = "<group>"; };
 		840C90111BAB05C200DCBACF /* Saver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Saver.h; sourceTree = "<group>"; };
 		840C90121BAB05C200DCBACF /* Saver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Saver.m; sourceTree = "<group>"; };
 		84B8D52A1BB023FD00B75ABC /* butIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = butIcon.png; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				25A561ED1B9C760C000A5EBC /* Images.xcassets */,
 				25A561EF1B9C760C000A5EBC /* LaunchScreen.xib */,
 				25A561E41B9C760C000A5EBC /* prom_graph.xcdatamodeld */,
+				6D03D2691BB0720B0069BE41 /* fail.mp3 */,
 				6D03D2671BB065600069BE41 /* toxic.mp3 */,
 				6D03D2651BB064590069BE41 /* chpok.mp3 */,
 				6D03D25C1BB053400069BE41 /* mainTheme.mp3 */,
@@ -321,6 +324,7 @@
 			files = (
 				25A561EC1B9C760C000A5EBC /* Main.storyboard in Resources */,
 				84EED4E41BAE18A50028D1E2 /* MainLogo.png in Resources */,
+				6D03D26A1BB0720B0069BE41 /* fail.mp3 in Resources */,
 				6D03D25D1BB053400069BE41 /* mainTheme.mp3 in Resources */,
 				25A561F11B9C760C000A5EBC /* LaunchScreen.xib in Resources */,
 				6D03D25B1BB03A920069BE41 /* toxic.jpg in Resources */,

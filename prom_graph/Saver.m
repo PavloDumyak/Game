@@ -8,6 +8,7 @@
 
 #import "Saver.h"
 
+
 @implementation Saver
 @synthesize myScoreRecords=_myScoreRecords;
 @synthesize allNames=_allNames;
@@ -25,16 +26,25 @@
 }
 
 
-
+-(void)createDefaultSaver
+{
+   
+    //[self.defaultSaver setObject:self.myScoreRecords forKey:key];
+}
 
 -(void)initDictionary
 {
     static BOOL flag = NO;
     
     if(flag==NO){
-        self.myScoreRecords = [[NSMutableDictionary alloc] initWithCapacity:10];
+        self.defaultSaver = [NSUserDefaults standardUserDefaults];
+        self.myScoreRecords = [[NSMutableDictionary alloc]initWithCapacity:10];
+        
+      
         self.allNames = [[NSMutableArray alloc] initWithCapacity:10];
     }
+   
+                               
     flag = YES;
     
     

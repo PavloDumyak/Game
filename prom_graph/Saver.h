@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+// NSString* key = @"AllScore";
 @interface Saver : NSObject
 +(Saver*)sharedInstance;
 -(void)initDictionary;
 -(void)getScoreArray;
+-(void)createDefaultSaver;
 @property int result;
-@property NSUserDefaults* pref;
+@property NSUserDefaults* defaultSaver;
 @property NSMutableDictionary *myScoreRecords;
 @property  NSString* currentName;
 @property NSMutableArray* allNames;
