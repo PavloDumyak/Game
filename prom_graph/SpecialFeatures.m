@@ -33,7 +33,7 @@
     switch (self.selectedType)
     {
         case 0:
-              image= [UIImage imageNamed:@"toxic.jpg"];
+             // image= [UIImage imageNamed:@"toxic.jpg"];
             break;
             
         default:

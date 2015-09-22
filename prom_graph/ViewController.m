@@ -42,11 +42,11 @@
 
 -(void)playMusic
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
-    self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
-    self.audioPlayer.delegate = self;
-    [self.audioPlayer prepareToPlay];
-    [self.audioPlayer play];
+   // NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
+    //self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+   // self.audioPlayer.delegate = self;
+    //[self.audioPlayer prepareToPlay];
+    //[self.audioPlayer play];
     
     
 }

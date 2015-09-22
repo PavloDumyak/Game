@@ -42,8 +42,9 @@ static NSInteger const kNumberOfFigures = 10;
 -(void)viewWillDisappear:(BOOL)animated
 {
     
-    Saver *ob = [Saver sharedInstance];
-    NSString *tmp = [NSString stringWithFormat:@"%i",self.score];
+   Saver *ob = [Saver sharedInstance];
+    /*
+    
 
     BOOL flag = NO;
     for(int i = 0; i< [ob.allNames count]; i++)
@@ -57,9 +58,32 @@ static NSInteger const kNumberOfFigures = 10;
     if(flag == NO)
     {
         [ob.allNames addObject:ob.currentName]; 
-    }
+    }*/
    
-   [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+   NSString *tmp = [NSString stringWithFormat:@"%li",(long)self.score];
+  
+        NSDictionary *result = [[NSUserDefaults standardUserDefaults] objectForKey:@"leader"];
+        if (result == nil)
+        {
+            result = [[NSDictionary alloc] init];
+        }
+        
+        NSMutableDictionary *mDict = [result mutableCopy];
+    
+        if (!ob.currentName|| ob.currentName.length == 0)
+        {
+            ob.currentName = @"<noname>";
+        }
+    [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+    
+        [mDict setObject:tmp forKey:ob.currentName];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:@"leader"];
+     [[NSUserDefaults standardUserDefaults] setObject:ob.allNames forKey:@"name"];
+    
+    
+
+    
     
     
     

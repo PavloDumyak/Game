@@ -12,4 +12,7 @@
 @property NSMutableArray* players;
 @property NSMutableArray* scores;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;
+@property (nonatomic, assign) NSDictionary* score;
+@property (nonatomic, assign) NSArray* keys;
+@property (nonatomic, assign) NSArray *values;
 @end

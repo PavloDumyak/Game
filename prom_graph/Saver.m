@@ -18,10 +18,8 @@
     static Saver* object;
     static dispatch_once_t predicat;
     dispatch_once(&predicat, ^{object = [[Saver alloc]init];
-        
     });
    [object initDictionary];
-    
     return object;
 }
 

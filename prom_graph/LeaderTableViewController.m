@@ -21,6 +21,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.score  = [[NSUserDefaults standardUserDefaults] objectForKey:@"leader"];
+    NSLog(@"%@", self.score);
+   
+    self.keys  = [self.score allKeys];
+    self.values = [self.score allValues];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,32 +38,38 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     Saver *SObject = [Saver sharedInstance];
-    return [SObject.myScoreRecords count];
+    return [self.score count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Saver *SObject = [Saver sharedInstance];
-    
-    NSLog(@"%@",self.scores);
     UITableViewCell *cell;
     NSInteger rows = [indexPath row];
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    NSString *tmpResult = [SObject.allNames objectAtIndex:rows];
+    cell.textLabel.text = [self.keys objectAtIndex:rows];
+    cell.detailTextLabel.text = [self.values objectAtIndex:rows];
+    
+    
+    
+   /* NSLog(@"%@",self.scores);
+    UITableViewCell *cell;
+    NSInteger rows = [indexPath row];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    NSString *tmpResult = [self.nameArray objectAtIndex:rows];
     NSString *result = tmpResult;
     tmpResult = [tmpResult stringByAppendingString:@"-------------------------------"];
-    result=[tmpResult stringByAppendingString:[SObject.myScoreRecords objectForKey: result]];
+    result=[tmpResult stringByAppendingString:[self.score objectForKey: @"Pavlo"]];
     
     cell.textLabel.text = result;
     
     //[SObject.sc objectAtIndex:rows];
  
     
-   
-    
-    
-   self.scoreLable.text = [self.scores objectAtIndex:rows];
+
+   self.scoreLable.text = [self.scores objectAtIndex:rows];*/
     return cell;
 }
 

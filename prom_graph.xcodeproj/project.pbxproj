@@ -18,8 +18,6 @@
 		25A561FD1B9C760C000A5EBC /* prom_graphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A561FC1B9C760C000A5EBC /* prom_graphTests.m */; };
 		25A5620B1B9C8073000A5EBC /* MyCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5620A1B9C8073000A5EBC /* MyCanvas.m */; };
 		6D03D2201BB00BBD0069BE41 /* SpecialFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03D21F1BB00BBD0069BE41 /* SpecialFeatures.m */; };
-		6D03D25B1BB03A920069BE41 /* toxic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D25A1BB03A920069BE41 /* toxic.jpg */; };
-		6D03D25D1BB053400069BE41 /* mainTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D25C1BB053400069BE41 /* mainTheme.mp3 */; };
 		6D03D2601BB0558C0069BE41 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03D25E1BB055270069BE41 /* AudioToolbox.framework */; };
 		6D03D2641BB05B980069BE41 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03D2631BB05B980069BE41 /* AVFoundation.framework */; };
 		6D03D2661BB064590069BE41 /* chpok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D03D2651BB064590069BE41 /* chpok.mp3 */; };
@@ -76,8 +74,6 @@
 		25A5620A1B9C8073000A5EBC /* MyCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCanvas.m; sourceTree = "<group>"; };
 		6D03D21E1BB00BBD0069BE41 /* SpecialFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialFeatures.h; sourceTree = "<group>"; };
 		6D03D21F1BB00BBD0069BE41 /* SpecialFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialFeatures.m; sourceTree = "<group>"; };
-		6D03D25A1BB03A920069BE41 /* toxic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = toxic.jpg; path = ../../toxic.jpg; sourceTree = "<group>"; };
-		6D03D25C1BB053400069BE41 /* mainTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = mainTheme.mp3; path = /Volumes/CLOVER/mainTheme.mp3; sourceTree = "<absolute>"; };
 		6D03D25E1BB055270069BE41 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6D03D2631BB05B980069BE41 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6D03D2651BB064590069BE41 /* chpok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chpok.mp3; sourceTree = "<group>"; };
@@ -159,7 +155,6 @@
 				6D03D2691BB0720B0069BE41 /* fail.mp3 */,
 				6D03D2671BB065600069BE41 /* toxic.mp3 */,
 				6D03D2651BB064590069BE41 /* chpok.mp3 */,
-				6D03D25C1BB053400069BE41 /* mainTheme.mp3 */,
 				25A561DD1B9C760C000A5EBC /* Supporting Files */,
 			);
 			path = prom_graph;
@@ -168,7 +163,6 @@
 		25A561DD1B9C760C000A5EBC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D03D25A1BB03A920069BE41 /* toxic.jpg */,
 				84B8D52A1BB023FD00B75ABC /* butIcon.png */,
 				84EED4E31BAE18A50028D1E2 /* MainLogo.png */,
 				84EED4DF1BAE0F780028D1E2 /* FirstBackground.jpg */,
@@ -325,9 +319,7 @@
 				25A561EC1B9C760C000A5EBC /* Main.storyboard in Resources */,
 				84EED4E41BAE18A50028D1E2 /* MainLogo.png in Resources */,
 				6D03D26A1BB0720B0069BE41 /* fail.mp3 in Resources */,
-				6D03D25D1BB053400069BE41 /* mainTheme.mp3 in Resources */,
 				25A561F11B9C760C000A5EBC /* LaunchScreen.xib in Resources */,
-				6D03D25B1BB03A920069BE41 /* toxic.jpg in Resources */,
 				84CCE5EA1BADE882002A67CA /* CatImage.png in Resources */,
 				84EED4E21BAE0FA10028D1E2 /* backgroundImage.jpg in Resources */,
 				84CCE5EB1BADE882002A67CA /* CatPinkImage.png in Resources */,
