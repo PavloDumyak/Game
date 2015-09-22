@@ -32,6 +32,7 @@ static NSInteger const kNumberOfFigures = 10;
 @property (nonatomic, strong) UIView *explosiveBackground;
 @property (weak, nonatomic) IBOutlet UILabel *visualScore;
 @property (weak, nonatomic) IBOutlet UILabel *gameOverLable;
+@property BOOL saveFlag;
 
 @end
 
@@ -41,28 +42,13 @@ static NSInteger const kNumberOfFigures = 10;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    
+    if(self.saveFlag == YES)
+    {
    Saver *ob = [Saver sharedInstance];
-    /*
-    
-
-    BOOL flag = NO;
-    for(int i = 0; i< [ob.allNames count]; i++)
-    {
-        if(([[ob.allNames objectAtIndex:i] isEqual:ob.currentName])==YES)
-        {
-            flag = YES;
-        }
-    }
-    
-    if(flag == NO)
-    {
-        [ob.allNames addObject:ob.currentName]; 
-    }*/
-   
    NSString *tmp = [NSString stringWithFormat:@"%li",(long)self.score];
   
         NSDictionary *result = [[NSUserDefaults standardUserDefaults] objectForKey:@"leader"];
+        
         if (result == nil)
         {
             result = [[NSDictionary alloc] init];
@@ -74,25 +60,20 @@ static NSInteger const kNumberOfFigures = 10;
         {
             ob.currentName = @"<noname>";
         }
-    [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
-    
-        [mDict setObject:tmp forKey:ob.currentName];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:@"leader"];
-     [[NSUserDefaults standardUserDefaults] setObject:ob.allNames forKey:@"name"];
-    
-    
 
-    
-    
-    
-    
-    
+    [ob.myScoreRecords setValue:tmp forKey:ob.currentName];
+    [mDict setObject:tmp forKey:ob.currentName];
+    [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:@"leader"];
+    [[NSUserDefaults standardUserDefaults] setObject:ob.allNames forKey:@"name"];
+        
+    }
+    self.saveFlag = YES;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationItem setHidesBackButton:YES];
     [self createFigures];
     [self createFeature];
     self.distance = 1000000.0;
@@ -599,16 +580,56 @@ static NSInteger const kNumberOfFigures = 10;
     if([self.figures count]>12)
     {
         
-        [self.timer invalidate];
-        [self.timerForANewFigureEverySecond invalidate];
-        [self.timerExplosive invalidate];
-        [self.timerForCreatinfFeature invalidate];
-        [self.timerForFeatureAnimation invalidate];
+        [self gameOver];
         
-        self.view.userInteractionEnabled = NO;
-        self.gameOverLable.hidden = NO;
-        [self.view bringSubviewToFront:self.gameOverLable];
+       
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    Saver* ob  =[ Saver sharedInstance];
+ 
+    
+    if(buttonIndex == 0)
+    {
+    [ob setCurrentName:[[alertView textFieldAtIndex:0] text]];
+        self.saveFlag = YES;
+    }
+    if(buttonIndex == 1)
+    {
+        self.saveFlag = NO;
+    }
+    
+    [self performSegueWithIdentifier:@"goHome" sender:nil];
+}
+
+- (IBAction)endGame:(id)sender
+{
+    [self gameOver];
+}
+
+-(void)gameOver
+{
+    [self.timer invalidate];
+    [self.timerForANewFigureEverySecond invalidate];
+    [self.timerExplosive invalidate];
+    [self.timerForCreatinfFeature invalidate];
+    [self.timerForFeatureAnimation invalidate];
+    self.view.userInteractionEnabled = NO;
+    self.gameOverLable.hidden = NO;
+    [self.view bringSubviewToFront:self.gameOverLable];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do you wanna save score?"
+                                                    message:@"Write player's name"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Yes"
+                                          otherButtonTitles:@"No",nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [self.view addSubview:alert];
+    [alert show];
+    
+    
 }
 
 @end

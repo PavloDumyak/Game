@@ -37,46 +37,32 @@
     
     NSLog(@"%li", (long)[self.prefs integerForKey:@"Pavlo"]);
     [self playMusic];
-    
+    [self.navigationItem setHidesBackButton:YES];
    }
 
 -(void)playMusic
 {
-   // NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
-    //self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
-   // self.audioPlayer.delegate = self;
-    //[self.audioPlayer prepareToPlay];
-    //[self.audioPlayer play];
+   NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
+    self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+    self.audioPlayer.delegate = self;
+  //  [self.audioPlayer prepareToPlay];
+   // [self.audioPlayer play];
     
     
 }
 
 - (IBAction)playOrStopMusic:(id)sender
 {
-    if([self.button.titleLabel.text isEqualToString:@"Play"])
+    if([self.button.titleLabel.text isEqualToString:@"Play Music"])
     {
        
         [self.button setTitle:@"Stop" forState:UIControlStateNormal];
         [self.audioPlayer play];
     }else
     {
-        [self.button setTitle:@"Play" forState:UIControlStateNormal];
+        [self.button setTitle:@"Play Music" forState:UIControlStateNormal];
         [self.audioPlayer stop];
     }
-
-    
-}
-
-- (void) addPlayerName:(NSString*)name
-{
-    
-    Saver *SObject = [Saver sharedInstance];
-    
-    [SObject.myScoreRecords setObject:@" " forKey:name];
-     SObject.currentName =name;
-    
-    NSLog(@"%@", SObject.myScoreRecords);
-    
 }
 
 
@@ -99,11 +85,6 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    [self addPlayerName:[[alertView textFieldAtIndex:0] text]];
-    [self performSegueWithIdentifier:@"gameSegue" sender:nil];
-}
 
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -118,14 +99,7 @@
 
 - (IBAction)beginNewGame:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New player"
-                                                    message:@"Write new player's name"
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [self.view addSubview:alert];
-    [alert show];
-    
+
+      [self performSegueWithIdentifier:@"gameSegue" sender:nil];
 }
 @end

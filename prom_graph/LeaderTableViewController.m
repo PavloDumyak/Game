@@ -21,12 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.score  = [[NSUserDefaults standardUserDefaults] objectForKey:@"leader"];
-    NSLog(@"%@", self.score);
-   
-    self.keys  = [self.score allKeys];
-    self.values = [self.score allValues];
+    self.keys  =  [NSMutableArray arrayWithArray:[self.score allKeys]];
+    self.values = [NSMutableArray arrayWithArray:[self.score allValues]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,42 +31,40 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"leader"];
+        [self viewDidLoad];
+        [tableView reloadData];
+    }
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    Saver *SObject = [Saver sharedInstance];
-    return [self.score count];
+    return [self.keys count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Saver *SObject = [Saver sharedInstance];
     UITableViewCell *cell;
     NSInteger rows = [indexPath row];
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+    if(![self.keys isEqual:nil])
+    {
     cell.textLabel.text = [self.keys objectAtIndex:rows];
     cell.detailTextLabel.text = [self.values objectAtIndex:rows];
+    }
     
     
-    
-   /* NSLog(@"%@",self.scores);
-    UITableViewCell *cell;
-    NSInteger rows = [indexPath row];
-    cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    NSString *tmpResult = [self.nameArray objectAtIndex:rows];
-    NSString *result = tmpResult;
-    tmpResult = [tmpResult stringByAppendingString:@"-------------------------------"];
-    result=[tmpResult stringByAppendingString:[self.score objectForKey: @"Pavlo"]];
-    
-    cell.textLabel.text = result;
-    
-    //[SObject.sc objectAtIndex:rows];
- 
-    
-
-   self.scoreLable.text = [self.scores objectAtIndex:rows];*/
+  
     return cell;
 }
 
