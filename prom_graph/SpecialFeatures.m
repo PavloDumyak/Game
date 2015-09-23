@@ -9,41 +9,64 @@
 #import "SpecialFeatures.h"
 
 @implementation SpecialFeatures
+@synthesize coords=_coords;
 
 
 
-
--(instancetype)initFeature:(SCFeatureType)typeOfFeature
+-(instancetype)initFeature:(SCFeatureType)typeOfFeature:(CGPoint)xy
 {
-    if (self = [super initWithFrame:CGRectMake(0, 100, 70, 70)])
+    
+        self.currentRect = CGRectMake(xy.x, xy.y, 100, 100);
+       self.backgroundColor = [UIColor blueColor];
+        [self setCoords:xy];
+   
+  
+    if (self = [super initWithFrame:self.currentRect])
     {
-        self.selectedType = SCFeatureBomb;
+        self.selectedType = typeOfFeature;
     }
     return self;
 }
 
 
 
+
+
 -(void)choiceYourFeature:(CGRect)rect
 {
-   
-    UIImageView *imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+
+    UIImageView *imageHolder;
     UIImage *image;
-        
     switch (self.selectedType)
     {
         case 0:
-             // image= [UIImage imageNamed:@"toxic.jpg"];
+            imageHolder=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+            image= [UIImage imageNamed:@"toxic.jpg"];
+            imageHolder.image = image;
+            break;
+            
+        case 1:
+            imageHolder=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+            image= [UIImage imageNamed:@"toxic.jpg"];
+            imageHolder.image = image;
+            break;
+        case 2:
+            imageHolder=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+            image= [UIImage imageNamed:@"toxic.jpg"];
+            imageHolder.image = image;
+            break;
+        case 3:
+            imageHolder=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+            image= [UIImage imageNamed:@"toxic.jpg"];
+            imageHolder.image = image;
             break;
             
         default:
             break;
     }
-    
-    imageHolder.image = image;
+    imageHolder.userInteractionEnabled = YES;
     [self addSubview:imageHolder];
-    
-    
+   
 }
 
 
@@ -51,8 +74,11 @@
 
 - (void)drawRect:(CGRect)rect
 {
+   
+    
     self.backgroundColor = [UIColor clearColor];
-    rect = CGRectInset(rect, rect.size.width/100*2, rect.size.height/100*2);
+    
+   // rect = CGRectInset(rect, rect.size.width/100*2, rect.size.height/100*2);
     [self choiceYourFeature:rect];
 }
 

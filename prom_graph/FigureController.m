@@ -33,11 +33,15 @@ static NSInteger const kNumberOfFigures = 10;
 @property (weak, nonatomic) IBOutlet UILabel *visualScore;
 @property (weak, nonatomic) IBOutlet UILabel *gameOverLable;
 @property BOOL saveFlag;
+@property (nonatomic, strong) NSMutableArray* shitArray;
+@property (nonatomic, assign) CGFloat speed;
+@property (nonatomic, assign) CGFloat timeForANewAnimal;
+@property (weak, nonatomic) IBOutlet UIImageView *myActiveBackground;
 
 @end
 
 @implementation FigureController
-
+@synthesize shitArray=_shitArray;
 
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -84,31 +88,44 @@ static NSInteger const kNumberOfFigures = 10;
     panRecognizer.minimumNumberOfTouches = 1;
     panRecognizer.maximumNumberOfTouches = 1;
     [self.view addGestureRecognizer:panRecognizer];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                  target:self
-                                                  selector:@selector(timerFire)
-                                                  userInfo:nil
-                                                   repeats:YES];
+        self.score=0;
+    [self startAllTimers];
+    [self startAnimalTimer];
+    self.gameOverLable.hidden = YES;
+    self.timeForANewAnimal = 2.0f;
+      self.myActiveBackground.image = [UIImage imageNamed:@"toxic.jpg"];
     
-    self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:2
+}
+
+-(void)startAnimalTimer
+{
+    self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:self.timeForANewAnimal
                                                                           target:self
                                                                         selector:@selector(placeFigure)
                                                                         userInfo:nil
                                                                          repeats:YES];
-    self.timerForFeatureAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                            target:self
-                                                          selector:@selector(FeaturetimerFire)
-                                                          userInfo:nil
-                                                           repeats:YES];
-    self.timerForCreatinfFeature = [NSTimer scheduledTimerWithTimeInterval:10
+    
+}
+
+-(void)startAllTimers
+{
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                  target:self
+                                                selector:@selector(timerFire)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+       self.timerForFeatureAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                                      target:self
-                                                                   selector:@selector(createFeature)
+                                                                   selector:@selector(FeaturetimerFire)
                                                                    userInfo:nil
                                                                     repeats:YES];
-    self.score=0;
-    
-    self.gameOverLable.hidden = YES;
-    
+    self.timerForCreatinfFeature = [NSTimer scheduledTimerWithTimeInterval:20
+                                                                    target:self
+                                                                  selector:@selector(createFeature)
+                                                                  userInfo:nil
+                                                                   repeats:YES];
 }
 
 
@@ -173,6 +190,8 @@ static NSInteger const kNumberOfFigures = 10;
 
 -(void)moveAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(MyCanvas*) weakView
 {
+    if(self.shitArray.count==0)
+    {
     [UIView animateWithDuration:0.1 animations:^{
         for (MyCanvas* figure in self.figures)
         {
@@ -219,6 +238,7 @@ static NSInteger const kNumberOfFigures = 10;
             }
         }
     }];
+    }
 }
 
 
@@ -226,6 +246,9 @@ static NSInteger const kNumberOfFigures = 10;
 
 -(void)featureAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(SpecialFeatures*) weakView
 {
+    if(weakView.selectedType == 0)
+    {
+    
     [UIView animateWithDuration:0.1 animations:^{
         CGPoint currentVector = self.currentFeature.featureVector;
         
@@ -234,6 +257,7 @@ static NSInteger const kNumberOfFigures = 10;
         
         
     }];
+    }
 }
 
 -(void)changeBackground
@@ -440,13 +464,49 @@ static NSInteger const kNumberOfFigures = 10;
     CGPoint location = [touches.anyObject locationInView:self.view];
     
     
-    if(CGRectContainsPoint([self.currentFeature frame], location))
+    if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==0)
     {
-        
+          self.myActiveBackground.image = [UIImage imageNamed:@"toxicpeople.jpg"];
+       [self.timerForANewFigureEverySecond invalidate];
+        self.timeForANewAnimal = 2;
+        [self startAnimalTimer];
         [self deleteAllAnimals];
         [self.currentFeature removeFromSuperview];
         self.currentFeature = nil;
     }
+    
+    
+    if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==1)
+    {  self.myActiveBackground.image = [UIImage imageNamed:@"huilo.jpg"];
+        [self.timerForANewFigureEverySecond invalidate];
+        self.timeForANewAnimal = 2;
+        [self startAnimalTimer];
+        self.speed = 200.0f;
+        [self.currentFeature removeFromSuperview];
+        self.currentFeature = nil;
+    }
+    
+    if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==2)
+    {  self.myActiveBackground.image = [UIImage imageNamed:@"toxic.jpg"];
+        [self.timerForANewFigureEverySecond invalidate];
+        self.timeForANewAnimal = 2;
+        [self startAnimalTimer];
+        self.speed = 0.1f;
+        [self.currentFeature removeFromSuperview];
+        self.currentFeature = nil;
+    }
+
+    if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==3)
+    {
+      
+        [self.timerForANewFigureEverySecond invalidate];// = YES;
+        self.timeForANewAnimal = 0.3f;
+        [self startAnimalTimer];
+        [self.currentFeature removeFromSuperview];
+        self.currentFeature = nil;
+    }
+
+    
     
     for(int i = 0; i < self.figures.count; i++)
     {
@@ -502,10 +562,38 @@ static NSInteger const kNumberOfFigures = 10;
 
 -(void)createFeature
 {
+    
+    self.speed = 20.0f;
     [self.currentFeature removeFromSuperview];
+    self.timeForANewAnimal = 2.0f;
     self.currentFeature = nil;
-    self.currentFeature = [[SpecialFeatures alloc]initFeature:0];
-    [self placeFeature];
+    int random = rand()%4;
+    CGPoint tmpCords; 
+    if(random == 0)
+   {   tmpCords = CGPointMake(rand()%320, rand()%400);
+       self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
+       [self placeFeature:random];
+   }
+    
+    if(random == 1)
+    {   tmpCords = CGPointMake(rand()%320, rand()%400);
+        self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
+        [self placeFeature:random];
+    }
+    
+    if(random == 2)
+    {   tmpCords = CGPointMake(rand()%320, rand()%400);
+        self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
+        [self placeFeature:random];
+    }
+    
+    if(random == 3)
+    {   tmpCords = CGPointMake(rand()%320, rand()%400);
+        self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
+        [self placeFeature:random];
+    }
+
+
 }
 
 
@@ -514,26 +602,33 @@ static NSInteger const kNumberOfFigures = 10;
 -(CGPoint)generateVector
 {
     CGPoint currentVector;
-    CGFloat distance1 = 35.0f;
-    CGFloat diffX = ((float)rand() / (float)RAND_MAX) * distance1 - distance1 / 2.0f;
-    CGFloat diffY = ((float)rand() / (float)RAND_MAX) * distance1 - distance1 / 2.0f;
+   if(self.speed == 0)
+   {
+       self.speed = 20.0f;
+   }
+    CGFloat diffX = ((float)rand() / (float)RAND_MAX) * self.speed - self.speed/ 2.0f;
+    CGFloat diffY = ((float)rand() / (float)RAND_MAX) * self.speed - self.speed/ 2.0f;
     currentVector = CGPointMake(diffX, diffY);
     return currentVector;
 }
 
 
 //Placing figure and feature
--(void)placeFeature
+-(void)placeFeature:(NSInteger)type
 {
+    
     self.currentFeature.featureVector = [self generateVector];
       self.currentFeature.userInteractionEnabled = NO;
     [self.view addSubview:self.currentFeature];
+    
+
 }
 
 - (void)placeFigure
 {
-
     
+if(self.shitArray.count==0)
+{
     [self.timerExplosive invalidate];
     [self.explosiveBackground removeFromSuperview];
         NSInteger type = ((float)rand() / (float)RAND_MAX) * MCAnimalTypeCount;
@@ -577,13 +672,11 @@ static NSInteger const kNumberOfFigures = 10;
         [self.view addSubview:ob];
     [self.view addSubview:self.currentFeature];
     
-    if([self.figures count]>12)
+    if([self.figures count]>60)
     {
-        
         [self gameOver];
-        
-       
     }
+}
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
