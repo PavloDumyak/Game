@@ -17,34 +17,22 @@
 {
     static Saver* object;
     static dispatch_once_t predicat;
-    dispatch_once(&predicat, ^{object = [[Saver alloc]init];
-    });
+    dispatch_once(&predicat, ^{object = [[Saver alloc]init];});
    [object initDictionary];
     return object;
 }
 
 
--(void)createDefaultSaver
-{
-   
-    //[self.defaultSaver setObject:self.myScoreRecords forKey:key];
-}
-
--(void)initDictionary
+- (void)initDictionary
 {
     static BOOL flag = NO;
-    
-    if(flag==NO){
+    if(flag==NO)
+    {
         self.defaultSaver = [NSUserDefaults standardUserDefaults];
         self.myScoreRecords = [[NSMutableDictionary alloc]initWithCapacity:10];
-        
-      
         self.allNames = [[NSMutableArray alloc] initWithCapacity:10];
     }
    
-                               
     flag = YES;
-    
-    
 }
 @end

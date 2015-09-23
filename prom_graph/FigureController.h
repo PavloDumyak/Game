@@ -12,5 +12,3 @@
 #import <AVFoundation/AVFoundation.h>
 @interface FigureController : UIViewController
 @end
-
-//[[NSUserDefaults standardDefaults] setObject:<dictionary> forKey:kSomeKey]

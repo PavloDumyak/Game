@@ -11,7 +11,6 @@
 @interface Saver : NSObject
 +(Saver*)sharedInstance;
 -(void)initDictionary;
--(void)createDefaultSaver;
 @property int result;
 @property NSUserDefaults* defaultSaver;
 @property NSMutableDictionary *myScoreRecords;

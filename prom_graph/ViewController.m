@@ -21,7 +21,7 @@
 
 
 
--(void)viewDidLoad
+- (void)viewDidLoad
 {
     static int count  = 0;
     
@@ -40,7 +40,7 @@
     [self.navigationItem setHidesBackButton:YES];
    }
 
--(void)playMusic
+- (void)playMusic
 {
    NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
     self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
@@ -55,10 +55,11 @@
 {
     if([self.button.titleLabel.text isEqualToString:@"Play Music"])
     {
-       
         [self.button setTitle:@"Stop" forState:UIControlStateNormal];
         [self.audioPlayer play];
-    }else
+    }
+    
+    else
     {
         [self.button setTitle:@"Play Music" forState:UIControlStateNormal];
         [self.audioPlayer stop];
@@ -67,27 +68,27 @@
 
 
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"gameSegue"]){
+    if([segue.identifier isEqualToString:@"gameSegue"])
+    {
         NSLog(@"test");
     }
     
-    if([segue.identifier isEqualToString:@"leaderSegue"]){
+    if([segue.identifier isEqualToString:@"leaderSegue"])
+    {
     LeaderTableViewController *LTVCObject = (LeaderTableViewController*)segue.destinationViewController;
     [LTVCObject setPlayers:self.playerName];
         Saver* ob = [Saver sharedInstance];
         NSString *tmp = [NSString stringWithFormat:@"%i",ob.result];
         [self.score addObject:tmp];
         [LTVCObject setScores:self.score];
-       
-        
     }
 }
 
 
 
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if([identifier  isEqualToString: @"leaderSegue"])
     {
@@ -97,9 +98,8 @@
     return NO;
 }
 
-- (IBAction)beginNewGame:(id)sender {
-    
-
+- (IBAction)beginNewGame:(id)sender
+{
       [self performSegueWithIdentifier:@"gameSegue" sender:nil];
 }
 @end

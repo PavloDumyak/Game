@@ -44,7 +44,7 @@ static NSInteger const kNumberOfFigures = 10;
 @synthesize shitArray=_shitArray;
 
 
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     if(self.saveFlag == YES)
     {
@@ -69,7 +69,6 @@ static NSInteger const kNumberOfFigures = 10;
     [mDict setObject:tmp forKey:ob.currentName];
     [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:@"leader"];
     [[NSUserDefaults standardUserDefaults] setObject:ob.allNames forKey:@"name"];
-        
     }
     self.saveFlag = YES;
 }
@@ -81,46 +80,45 @@ static NSInteger const kNumberOfFigures = 10;
     [self createFigures];
     [self createFeature];
     self.distance = 1000000.0;
-    
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]
                                              initWithTarget:self
                                              action:@selector(handlePan:)];
     panRecognizer.minimumNumberOfTouches = 1;
     panRecognizer.maximumNumberOfTouches = 1;
     [self.view addGestureRecognizer:panRecognizer];
-        self.score=0;
     [self startAllTimers];
     [self startAnimalTimer];
+    
+    self.score=0;
     self.gameOverLable.hidden = YES;
     self.timeForANewAnimal = 2.0f;
-      self.myActiveBackground.image = [UIImage imageNamed:@"toxic.jpg"];
+    self.myActiveBackground.image = [UIImage imageNamed:@"1.jpg"];
     
 }
 
--(void)startAnimalTimer
+- (void)startAnimalTimer
 {
     self.timerForANewFigureEverySecond = [NSTimer scheduledTimerWithTimeInterval:self.timeForANewAnimal
                                                                           target:self
                                                                         selector:@selector(placeFigure)
                                                                         userInfo:nil
                                                                          repeats:YES];
-    
 }
 
--(void)startAllTimers
+- (void)startAllTimers
 {
-    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
                                                 selector:@selector(timerFire)
                                                 userInfo:nil
                                                  repeats:YES];
     
-       self.timerForFeatureAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1
+    self.timerForFeatureAnimation = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                                      target:self
                                                                    selector:@selector(FeaturetimerFire)
                                                                    userInfo:nil
                                                                     repeats:YES];
+    
     self.timerForCreatinfFeature = [NSTimer scheduledTimerWithTimeInterval:20
                                                                     target:self
                                                                   selector:@selector(createFeature)
@@ -131,10 +129,10 @@ static NSInteger const kNumberOfFigures = 10;
 
 //music
 
--(void)playMusic:(NSInteger)choice
+- (void)playMusic:(NSInteger)choice
 {
     CFBundleRef mainBundle = CFBundleGetMainBundle();
-     CFURLRef soundFileURLRef;
+    CFURLRef soundFileURLRef;
     UInt32 soundID;
 
     switch(choice)
@@ -188,14 +186,13 @@ static NSInteger const kNumberOfFigures = 10;
 
 
 
--(void)moveAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(MyCanvas*) weakView
+- (void)moveAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(MyCanvas*) weakView
 {
     if(self.shitArray.count==0)
     {
     [UIView animateWithDuration:0.1 animations:^{
         for (MyCanvas* figure in self.figures)
         {
-            
             if (weakView == nil || (weakView && ![figure isEqual:weakView]))
             {
                 CGPoint currentVector = figure.routeVector;
@@ -216,7 +213,7 @@ static NSInteger const kNumberOfFigures = 10;
                     }
                 }
                 
-                if (figure.center.y + figure.frame.size.height / 2 >= viewHeight)
+                if (figure.center.y + 30+figure.frame.size.height / 2 >= viewHeight)
                 {
                     currentVector = [self generateVector];
                     if(currentVector.y > 0)
@@ -232,7 +229,6 @@ static NSInteger const kNumberOfFigures = 10;
                         currentVector.y *= -1;
                     }
                 }
-                
                 figure.center = CGPointMake(figure.center.x +  currentVector.x, figure.center.y +  currentVector.y);
                 figure.routeVector = currentVector;
             }
@@ -244,23 +240,20 @@ static NSInteger const kNumberOfFigures = 10;
 
 
 
--(void)featureAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(SpecialFeatures*) weakView
+- (void)featureAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(SpecialFeatures*) weakView
 {
     if(weakView.selectedType == 0)
     {
-    
     [UIView animateWithDuration:0.1 animations:^{
         CGPoint currentVector = self.currentFeature.featureVector;
         
                        self.currentFeature.center = CGPointMake(self.currentFeature.center.x +  currentVector.x, self.currentFeature.center.y +  currentVector.y);
                 self.currentFeature.featureVector = currentVector;
-        
-        
     }];
     }
 }
 
--(void)changeBackground
+- (void)changeBackground
 {
     NSInteger currentBackgroundColor = rand()%4;
     [self.explosiveBackground removeFromSuperview];
@@ -288,35 +281,27 @@ static NSInteger const kNumberOfFigures = 10;
 }
 
 
--(void)deleteAllAnimals
+- (void)deleteAllAnimals
 {
     [self playMusic:1];
-    
     self.score = self.score + [self.figures count];
-    
     self.timerExplosive = [NSTimer scheduledTimerWithTimeInterval:0.001
                                                            target:self
                                                          selector:@selector(changeBackground)
                                                          userInfo:nil
                                                           repeats:YES];
+    
     NSLog(@"ANIMALS  %lu", (unsigned long)[self.figures count]);
     for(int i = 0; i < [self.figures count]; i++)
     {
         [self.figures[i] removeFromSuperview];
-      
     }
-    
-    
         [self.figures removeAllObjects];
-    
-    
     
     NSLog(@"%ld",(long)self.score);
     NSString *tmp = [NSString stringWithFormat:@"%li", (long)self.score];
-   self.visualScore.text = tmp;
-    
+    self.visualScore.text = tmp;
     NSLog(@"ANIMALS  %lu", (unsigned long)[self.figures count]);
-    
 }
 
 
@@ -362,7 +347,7 @@ static NSInteger const kNumberOfFigures = 10;
 
 
 
--(void)changePanGesture:(UIPanGestureRecognizer*)paramsender
+- (void)changePanGesture:(UIPanGestureRecognizer*)paramsender
 {
     CGPoint center = self.contView.center;
     CGPoint translation = [paramsender translationInView: self.view];
@@ -390,7 +375,7 @@ static NSInteger const kNumberOfFigures = 10;
 }
 
 
--(void)endPanGesture:(UIPanGestureRecognizer*)paramsender
+- (void)endPanGesture:(UIPanGestureRecognizer*)paramsender
 {
     [UIView animateWithDuration:0.1 animations:^{ self.contView.transform = CGAffineTransformIdentity;}];
     self.contView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
@@ -435,7 +420,6 @@ static NSInteger const kNumberOfFigures = 10;
             }
         }
         [self makeNill];
-        
     }
     
     else if ([self.contView selectedType] != [self.chosenView selectedType] && self.chosenView!=nil && self.contView!=nil)
@@ -451,7 +435,6 @@ static NSInteger const kNumberOfFigures = 10;
         [self makeNill];
     }
     [self makeNill];
-    
 }
 
 
@@ -460,13 +443,10 @@ static NSInteger const kNumberOfFigures = 10;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    
     CGPoint location = [touches.anyObject locationInView:self.view];
-    
-    
     if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==0)
     {
-          self.myActiveBackground.image = [UIImage imageNamed:@"toxicpeople.jpg"];
+          self.myActiveBackground.image = [UIImage imageNamed:@"2.jpg"];
        [self.timerForANewFigureEverySecond invalidate];
         self.timeForANewAnimal = 2;
         [self startAnimalTimer];
@@ -477,7 +457,7 @@ static NSInteger const kNumberOfFigures = 10;
     
     
     if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==1)
-    {  self.myActiveBackground.image = [UIImage imageNamed:@"huilo.jpg"];
+    {  self.myActiveBackground.image = [UIImage imageNamed:@"2.jpg"];
         [self.timerForANewFigureEverySecond invalidate];
         self.timeForANewAnimal = 2;
         [self startAnimalTimer];
@@ -487,7 +467,7 @@ static NSInteger const kNumberOfFigures = 10;
     }
     
     if(CGRectContainsPoint([self.currentFeature frame], location) && self.currentFeature.selectedType==2)
-    {  self.myActiveBackground.image = [UIImage imageNamed:@"toxic.jpg"];
+    {  self.myActiveBackground.image = [UIImage imageNamed:@"1.jpg"];
         [self.timerForANewFigureEverySecond invalidate];
         self.timeForANewAnimal = 2;
         [self startAnimalTimer];
@@ -552,7 +532,6 @@ static NSInteger const kNumberOfFigures = 10;
 
 - (void)createFigures
 {
-    
     self.figures = [[NSMutableArray alloc] init];
     for (int i = 0; i < kNumberOfFigures; ++i)
     {
@@ -560,15 +539,15 @@ static NSInteger const kNumberOfFigures = 10;
     }
 }
 
--(void)createFeature
+- (void)createFeature
 {
-    
     self.speed = 20.0f;
     [self.currentFeature removeFromSuperview];
     self.timeForANewAnimal = 2.0f;
     self.currentFeature = nil;
     int random = rand()%4;
-    CGPoint tmpCords; 
+    CGPoint tmpCords;
+    
     if(random == 0)
    {   tmpCords = CGPointMake(rand()%320, rand()%400);
        self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
@@ -592,14 +571,12 @@ static NSInteger const kNumberOfFigures = 10;
         self.currentFeature = [[SpecialFeatures alloc]initFeature:random:tmpCords];
         [self placeFeature:random];
     }
-
-
 }
 
 
 
 
--(CGPoint)generateVector
+- (CGPoint)generateVector
 {
     CGPoint currentVector;
    if(self.speed == 0)
@@ -614,9 +591,8 @@ static NSInteger const kNumberOfFigures = 10;
 
 
 //Placing figure and feature
--(void)placeFeature:(NSInteger)type
+- (void)placeFeature:(NSInteger)type
 {
-    
     self.currentFeature.featureVector = [self generateVector];
       self.currentFeature.userInteractionEnabled = NO;
     [self.view addSubview:self.currentFeature];
@@ -627,12 +603,12 @@ static NSInteger const kNumberOfFigures = 10;
 - (void)placeFigure
 {
     
-if(self.shitArray.count==0)
-{
-    [self.timerExplosive invalidate];
-    [self.explosiveBackground removeFromSuperview];
+    if(self.shitArray.count==0)
+    {
+        [self.timerExplosive invalidate];
+        [self.explosiveBackground removeFromSuperview];
         NSInteger type = ((float)rand() / (float)RAND_MAX) * MCAnimalTypeCount;
-    MyCanvas *ob;
+        MyCanvas *ob;
     
     
         ob = [[MyCanvas alloc] initWithType: type];
@@ -672,18 +648,17 @@ if(self.shitArray.count==0)
         [self.view addSubview:ob];
     [self.view addSubview:self.currentFeature];
     
-    if([self.figures count]>60)
+    if([self.figures count]>80)
     {
         [self gameOver];
     }
 }
 }
 
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     Saver* ob  =[ Saver sharedInstance];
- 
-    
     if(buttonIndex == 0)
     {
     [ob setCurrentName:[[alertView textFieldAtIndex:0] text]];
@@ -721,10 +696,7 @@ if(self.shitArray.count==0)
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [self.view addSubview:alert];
     [alert show];
-    
-    
 }
-
 @end
 
 

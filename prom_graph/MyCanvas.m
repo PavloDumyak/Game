@@ -41,15 +41,11 @@
 
 
 
-
-
 - (void)makeYourChoise:(CGRect) rect
 {
     UIImageView *imageHolder = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
     UIImage *image;
-    
-    
-    
+
     switch (self.selectedType) {
         case 0:
             image= [UIImage imageNamed:@"CatPinkImage.png"];
