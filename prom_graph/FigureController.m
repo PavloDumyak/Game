@@ -94,6 +94,7 @@ static NSInteger const kNumberOfFigures = 10;
     self.timeForANewAnimal = 2.0f;
     self.myActiveBackground.image = [UIImage imageNamed:@"1.jpg"];
     
+    
 }
 
 - (void)startAnimalTimer
@@ -242,15 +243,18 @@ static NSInteger const kNumberOfFigures = 10;
 
 - (void)featureAnimation:(CGFloat)distance :(CGFloat)viewHeight :(CGFloat)viewWidth :(SpecialFeatures*) weakView
 {
-    if(weakView.selectedType == 0)
-    {
+    
     [UIView animateWithDuration:0.1 animations:^{
         CGPoint currentVector = self.currentFeature.featureVector;
         
                        self.currentFeature.center = CGPointMake(self.currentFeature.center.x +  currentVector.x, self.currentFeature.center.y +  currentVector.y);
                 self.currentFeature.featureVector = currentVector;
+        if(self.currentFeature.center.x>400||self.currentFeature.center.y>400){
+            self.currentFeature.center= self.view.center;
+            
+        }
     }];
-    }
+    
 }
 
 - (void)changeBackground
@@ -480,7 +484,7 @@ static NSInteger const kNumberOfFigures = 10;
     {
       
         [self.timerForANewFigureEverySecond invalidate];// = YES;
-        self.timeForANewAnimal = 0.3f;
+        self.timeForANewAnimal = 1.0f;
         [self startAnimalTimer];
         [self.currentFeature removeFromSuperview];
         self.currentFeature = nil;
@@ -675,6 +679,12 @@ static NSInteger const kNumberOfFigures = 10;
 - (IBAction)endGame:(id)sender
 {
     [self gameOver];
+}
+- (IBAction)stopMusicPlaying:(id)sender
+{
+    musicPlayer *ob = [musicPlayer sharedInstance];
+    [ob stopMusic];
+    
 }
 
 -(void)gameOver

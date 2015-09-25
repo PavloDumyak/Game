@@ -10,5 +10,6 @@
 #import "Saver.h"
 #import "SpecialFeatures.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MusicPlayer.h"
 @interface FigureController : UIViewController
 @end

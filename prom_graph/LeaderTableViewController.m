@@ -22,8 +22,23 @@
 {
     [super viewDidLoad];
     self.score  = [[NSUserDefaults standardUserDefaults] objectForKey:@"leader"];
-    self.keys  =  [NSMutableArray arrayWithArray:[self.score allKeys]];
+    self.keys  = [self.score keysSortedByValueUsingComparator: ^(id obj1, id obj2) {
+        
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    self.keys2 = [NSMutableArray arrayWithArray: self.keys];
     self.values = [NSMutableArray arrayWithArray:[self.score allValues]];
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,15 +56,20 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
+        NSString *tmp = [self.keys objectAtIndex: indexPath.row];
+        [self.score removeObjectForKey:tmp];
+        [self.keys2 removeObjectAtIndex:indexPath.row];
+        [self.values removeObjectAtIndex:indexPath.row];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"leader"];
-        [self viewDidLoad];
+        [[NSUserDefaults standardUserDefaults]setObject:self.score forKey:@"leader"];
         [tableView reloadData];
     }
 }
 
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.keys count];
+    return [self.keys2 count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,14 +77,12 @@
     UITableViewCell *cell;
     NSInteger rows = [indexPath row];
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(![self.keys isEqual:nil])
+    if(![self.keys2 isEqual:nil])
     {
-    cell.textLabel.text = [self.keys objectAtIndex:rows];
-    cell.detailTextLabel.text = [self.values objectAtIndex:rows];
+        cell.textLabel.text = [self.keys2 objectAtIndex:rows];
+        cell.detailTextLabel.text = [self.score objectForKey:[self.keys2 objectAtIndex:rows]];
     }
     
-    
-  
     return cell;
 }
 

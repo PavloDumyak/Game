@@ -10,6 +10,7 @@
 #import "MyCanvas.h"
 #import "FigureController.h"
 #import "SpecialFeatures.h"
+#import "MusicPlayer.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *display;
 - (IBAction)beginNewGame:(id)sender;
@@ -36,33 +37,30 @@
     count++;
     
     NSLog(@"%li", (long)[self.prefs integerForKey:@"Pavlo"]);
-    [self playMusic];
+  
     [self.navigationItem setHidesBackButton:YES];
+    
+    musicPlayer *ob = [musicPlayer sharedInstance];
+    [ob playMusic];
+    
    }
 
-- (void)playMusic
-{
-   NSString *path = [[NSBundle mainBundle] pathForResource:@"mainTheme" ofType:@"mp3"];
-    self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
-    self.audioPlayer.delegate = self;
-   //[self.audioPlayer prepareToPlay];
-  // [self.audioPlayer play];
-    
-    
-}
+
 
 - (IBAction)playOrStopMusic:(id)sender
 {
+    musicPlayer *ob = [musicPlayer sharedInstance];
+    
     if([self.button.titleLabel.text isEqualToString:@"Play Music"])
     {
         [self.button setTitle:@"Stop" forState:UIControlStateNormal];
-        [self.audioPlayer play];
+        [ob playMusic];
     }
     
     else
     {
         [self.button setTitle:@"Play Music" forState:UIControlStateNormal];
-        [self.audioPlayer stop];
+        [ob stopMusic];
     }
 }
 
