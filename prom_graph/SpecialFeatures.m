@@ -17,12 +17,13 @@
 {
     
     self.currentRect = CGRectMake(xy.x, xy.y, 100, 100);
-    self.backgroundColor = [UIColor blueColor];
+    
     [self setCoords:xy];
    
     if (self = [super initWithFrame:self.currentRect])
     {
         self.selectedType = typeOfFeature;
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -33,7 +34,7 @@
     UIImageView *imageHolder;
     UIImage *image;
             imageHolder=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-            image= [UIImage imageNamed:@"toxic.jpg"];
+            image= [UIImage imageNamed:@"feature.png"];
             imageHolder.image = image;
     imageHolder.userInteractionEnabled = YES;
     [self addSubview:imageHolder];

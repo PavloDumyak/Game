@@ -37,6 +37,8 @@
 		84CCE5EB1BADE882002A67CA /* CatPinkImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E71BADE882002A67CA /* CatPinkImage.png */; };
 		84CCE5EC1BADE882002A67CA /* EnotImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E81BADE882002A67CA /* EnotImage.png */; };
 		84CCE5ED1BADE882002A67CA /* LamaImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84CCE5E91BADE882002A67CA /* LamaImage.png */; };
+		84DA93041BB8605100588E78 /* playmusic.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DA93031BB8605100588E78 /* playmusic.png */; };
+		84DA93061BB8612400588E78 /* feature.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DA93051BB8612400588E78 /* feature.png */; };
 		84E9F4AB1BAAEBBA00F19271 /* LeaderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E9F4AA1BAAEBBA00F19271 /* LeaderTableViewController.m */; };
 		84EED4E01BAE0F780028D1E2 /* FirstBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84EED4DF1BAE0F780028D1E2 /* FirstBackground.jpg */; };
 		84EED4E21BAE0FA10028D1E2 /* backgroundImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84EED4E11BAE0FA10028D1E2 /* backgroundImage.jpg */; };
@@ -105,6 +107,8 @@
 		84CCE5E71BADE882002A67CA /* CatPinkImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CatPinkImage.png; sourceTree = "<group>"; };
 		84CCE5E81BADE882002A67CA /* EnotImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EnotImage.png; sourceTree = "<group>"; };
 		84CCE5E91BADE882002A67CA /* LamaImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LamaImage.png; sourceTree = "<group>"; };
+		84DA93031BB8605100588E78 /* playmusic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playmusic.png; sourceTree = "<group>"; };
+		84DA93051BB8612400588E78 /* feature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feature.png; sourceTree = "<group>"; };
 		84E9F4A91BAAEBBA00F19271 /* LeaderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderTableViewController.h; sourceTree = "<group>"; };
 		84E9F4AA1BAAEBBA00F19271 /* LeaderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderTableViewController.m; sourceTree = "<group>"; };
 		84EED4DF1BAE0F780028D1E2 /* FirstBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FirstBackground.jpg; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 		25A561DD1B9C760C000A5EBC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84DA93051BB8612400588E78 /* feature.png */,
+				84DA93031BB8605100588E78 /* playmusic.png */,
 				84FB74B61BB83172005BE3E1 /* pause.jpg */,
 				846E807E1BB4CF030031B038 /* stopmusic.png */,
 				84FC51131BB4BAEF00C4CBEC /* stop.png */,
@@ -353,6 +359,7 @@
 				84EED4E41BAE18A50028D1E2 /* MainLogo.png in Resources */,
 				6D70C8A21BB2D6DA00C60CEE /* toxic.jpg in Resources */,
 				6D03D26A1BB0720B0069BE41 /* fail.mp3 in Resources */,
+				84DA93061BB8612400588E78 /* feature.png in Resources */,
 				25A561F11B9C760C000A5EBC /* LaunchScreen.xib in Resources */,
 				84CCE5EA1BADE882002A67CA /* CatImage.png in Resources */,
 				846E807F1BB4CF030031B038 /* stopmusic.png in Resources */,
@@ -371,6 +378,7 @@
 				6D03D2661BB064590069BE41 /* chpok.mp3 in Resources */,
 				25A561EE1B9C760C000A5EBC /* Images.xcassets in Resources */,
 				84F2E4201BAE06A5000392F7 /* HaskiImage.png in Resources */,
+				84DA93041BB8605100588E78 /* playmusic.png in Resources */,
 				6D70C8A71BB2F54000C60CEE /* 2.jpg in Resources */,
 				84F2E41F1BAE06A5000392F7 /* FrogImage.png in Resources */,
 				84F2E41B1BAE06A5000392F7 /* CamelImage.png in Resources */,

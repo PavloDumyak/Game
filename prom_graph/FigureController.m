@@ -703,10 +703,24 @@ static NSInteger const kNumberOfFigures = 10;
 }
 - (IBAction)stopMusicPlaying:(id)sender
 {
+    UIButton *theButton = (UIButton*)sender;
     NSInteger musicStatus =1;
-    [[NSUserDefaults standardUserDefaults] setInteger:musicStatus forKey:@"musicstatus"];
-    musicPlayer *ob = [musicPlayer sharedInstance];
-    [ob stopMusic];
+    if([[NSUserDefaults standardUserDefaults] integerForKey:@"musicstatus"]!=1)
+    {
+        [[NSUserDefaults standardUserDefaults] setInteger:musicStatus forKey:@"musicstatus"];
+        [theButton setImage:[UIImage imageNamed:@"playmusic.png"] forState:UIControlStateNormal];
+        musicPlayer *ob = [musicPlayer sharedInstance];
+        [ob stopMusic];
+        
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"musicstatus"];
+        [theButton setImage:[UIImage imageNamed:@"stopmusic.png"] forState:UIControlStateNormal];
+        musicPlayer *ob = [musicPlayer sharedInstance];
+        [ob playMusic];
+    }
+    
     
 }
 - (IBAction)gamePause:(id)sender
