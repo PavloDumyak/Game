@@ -49,6 +49,7 @@
 		84F2E4201BAE06A5000392F7 /* HaskiImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F2E4181BAE06A5000392F7 /* HaskiImage.png */; };
 		84F2E4211BAE06A5000392F7 /* MouseImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F2E4191BAE06A5000392F7 /* MouseImage.png */; };
 		84F2E4221BAE06A5000392F7 /* PandaImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F2E41A1BAE06A5000392F7 /* PandaImage.png */; };
+		84FB74B71BB83172005BE3E1 /* pause.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84FB74B61BB83172005BE3E1 /* pause.jpg */; };
 		84FC51141BB4BAEF00C4CBEC /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FC51131BB4BAEF00C4CBEC /* stop.png */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		84F2E4181BAE06A5000392F7 /* HaskiImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaskiImage.png; sourceTree = "<group>"; };
 		84F2E4191BAE06A5000392F7 /* MouseImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MouseImage.png; sourceTree = "<group>"; };
 		84F2E41A1BAE06A5000392F7 /* PandaImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PandaImage.png; sourceTree = "<group>"; };
+		84FB74B61BB83172005BE3E1 /* pause.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pause.jpg; sourceTree = "<group>"; };
 		84FC51131BB4BAEF00C4CBEC /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 		25A561DD1B9C760C000A5EBC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84FB74B61BB83172005BE3E1 /* pause.jpg */,
 				846E807E1BB4CF030031B038 /* stopmusic.png */,
 				84FC51131BB4BAEF00C4CBEC /* stop.png */,
 				6D70C8A51BB2F54000C60CEE /* 2.jpg */,
@@ -358,6 +361,7 @@
 				84F2E41D1BAE06A5000392F7 /* DogLionImage.png in Resources */,
 				84F2E41C1BAE06A5000392F7 /* CatCoolImage.png in Resources */,
 				84F2E41E1BAE06A5000392F7 /* EagleImage.png in Resources */,
+				84FB74B71BB83172005BE3E1 /* pause.jpg in Resources */,
 				6D70C8A41BB2D71400C60CEE /* toxicpeople.jpg in Resources */,
 				6D70C8A81BB2F54000C60CEE /* 1.jpg in Resources */,
 				6D3EAFE91BB18C81005E667B /* mainTheme.mp3 in Resources */,

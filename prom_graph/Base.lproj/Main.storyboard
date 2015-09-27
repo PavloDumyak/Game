@@ -123,20 +123,6 @@
                                     <segue destination="uhQ-MU-sXB" kind="show" identifier="leaderSegue" id="DoC-ux-d5C"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-pg-H6Y">
-                                <rect key="frame" x="16" y="279" width="288" height="38"/>
-                                <color key="backgroundColor" red="0.99202269720000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="25"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="5"/>
-                                <state key="normal" title="Start Game">
-                                    <color key="titleColor" red="0.0" green="0.75268308080808077" blue="0.16156221402651902" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="1" green="0.077838235359999994" blue="0.16704420170000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="beginNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G4K-up-Zyg"/>
-                                    <segue destination="AWx-nz-H0W" kind="show" identifier="gameSegue" id="TEI-S6-UqT"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="MainLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="qHS-ni-h93">
                                 <rect key="frame" x="16" y="72" width="288" height="185"/>
                                 <constraints>
@@ -175,6 +161,20 @@
                                     <action selector="playOrStopMusic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KpI-gy-xj3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-pg-H6Y">
+                                <rect key="frame" x="16" y="279" width="288" height="38"/>
+                                <color key="backgroundColor" red="0.99202269720000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="25"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="5"/>
+                                <state key="normal" title="Start Game">
+                                    <color key="titleColor" red="0.0" green="0.75268308080808077" blue="0.16156221402651902" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="0.077838235359999994" blue="0.16704420170000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G4K-up-Zyg"/>
+                                    <segue destination="AWx-nz-H0W" kind="show" identifier="gameSegue" id="TEI-S6-UqT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -209,6 +209,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="button" destination="uKw-lB-Qb5" id="Jtf-z2-WRd"/>
+                        <outlet property="gameStatus" destination="ndu-pg-H6Y" id="TPK-gh-nzx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -227,12 +228,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-5E-3Im">
-                                <rect key="frame" x="220" y="394" width="42" height="42"/>
-                                <fontDescription key="fontDescription" name="Marion-Bold" family="Marion" pointSize="41"/>
-                                <color key="textColor" red="0.79484296085858586" green="0.09537100301721449" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2c-ek-D75">
                                 <rect key="frame" x="16" y="206" width="288" height="67"/>
                                 <color key="backgroundColor" red="0.74585662159999999" green="0.79484296089999995" blue="0.001586866412" alpha="1" colorSpace="calibratedRGB"/>
@@ -280,23 +275,46 @@
                                             <action selector="stopMusicPlaying:" destination="AWx-nz-H0W" id="r8y-YK-93s"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" id="yZQ-z4-O9W">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ozi-eC-P1T">
+                                            <rect key="frame" x="248" y="397" width="39" height="39"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="pause.jpg">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="gamePause:" destination="AWx-nz-H0W" eventType="touchUpInside" id="oi4-gJ-bBx"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsX-Ke-Nyk">
+                                <rect key="frame" x="205" y="0.0" width="72" height="77"/>
+                                <fontDescription key="fontDescription" name="Marion-Bold" family="Marion" pointSize="71"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-5E-3Im">
+                                <rect key="frame" x="262" y="437" width="42" height="42"/>
+                                <fontDescription key="fontDescription" name="Marion-Bold" family="Marion" pointSize="41"/>
+                                <color key="textColor" red="0.79484296085858586" green="0.09537100301721449" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="P9s-aj-OFS" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" constant="-16" id="1Fd-ly-ITK"/>
+                            <constraint firstItem="sqm-5E-3Im" firstAttribute="trailing" secondItem="r5Q-8i-9MF" secondAttribute="trailingMargin" id="9xi-gl-yRB"/>
                             <constraint firstItem="a2c-ek-D75" firstAttribute="trailing" secondItem="r5Q-8i-9MF" secondAttribute="trailingMargin" id="Bnr-Aq-bqW"/>
                             <constraint firstItem="MHZ-rJ-ZIk" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leading" id="H5D-xc-dhQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="P9s-aj-OFS" secondAttribute="trailing" constant="-16" id="NEZ-aM-Yu5"/>
                             <constraint firstAttribute="bottom" secondItem="MHZ-rJ-ZIk" secondAttribute="bottom" id="Oel-Yx-geU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sqm-5E-3Im" secondAttribute="trailing" constant="42" id="VLF-kB-GqU"/>
                             <constraint firstItem="uSr-0F-dfc" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" constant="-16" id="VMf-ol-6OG"/>
                             <constraint firstItem="a2c-ek-D75" firstAttribute="top" secondItem="eJS-Qc-Lf7" secondAttribute="bottom" constant="150" id="Wp3-nr-fjf"/>
                             <constraint firstItem="a2c-ek-D75" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" id="gzd-ge-8jf"/>
                             <constraint firstItem="uSr-0F-dfc" firstAttribute="top" secondItem="r5Q-8i-9MF" secondAttribute="topMargin" id="jP9-4r-hYq"/>
-                            <constraint firstItem="sqm-5E-3Im" firstAttribute="leading" secondItem="r5Q-8i-9MF" secondAttribute="leadingMargin" constant="204" id="k5t-AU-WFM"/>
-                            <constraint firstItem="Dle-e7-B0h" firstAttribute="top" secondItem="sqm-5E-3Im" secondAttribute="bottom" id="laj-7j-8wb"/>
+                            <constraint firstItem="P9s-aj-OFS" firstAttribute="bottom" secondItem="sqm-5E-3Im" secondAttribute="bottom" constant="-5" id="l6x-JY-e4c"/>
                             <constraint firstAttribute="bottomMargin" secondItem="P9s-aj-OFS" secondAttribute="bottom" constant="6" id="nYl-EL-S4A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uSr-0F-dfc" secondAttribute="trailing" constant="-16" id="qGD-0U-rHp"/>
                             <constraint firstAttribute="trailing" secondItem="MHZ-rJ-ZIk" secondAttribute="trailing" id="vUo-5K-el2"/>
@@ -309,6 +327,7 @@
                     <connections>
                         <outlet property="gameOverLable" destination="a2c-ek-D75" id="qCB-A2-QBW"/>
                         <outlet property="myActiveBackground" destination="uSr-0F-dfc" id="Zgx-Yy-c77"/>
+                        <outlet property="point" destination="AsX-Ke-Nyk" id="lKx-I2-034"/>
                         <outlet property="visualScore" destination="sqm-5E-3Im" id="Nme-lG-vqO"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goHome" id="g6K-f1-gvS"/>
                     </connections>
@@ -322,6 +341,7 @@
         <image name="CatCoolImage.png" width="100" height="100"/>
         <image name="FirstBackground.jpg" width="400" height="400"/>
         <image name="MainLogo.png" width="408" height="283"/>
+        <image name="pause.jpg" width="230" height="219"/>
         <image name="stop.png" width="50" height="49"/>
         <image name="stopmusic.png" width="200" height="200"/>
     </resources>

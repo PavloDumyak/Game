@@ -39,9 +39,21 @@
     NSLog(@"%li", (long)[self.prefs integerForKey:@"Pavlo"]);
   
     [self.navigationItem setHidesBackButton:YES];
+      musicPlayer *ob = [musicPlayer sharedInstance];
+    NSInteger gMusicStatus = [[NSUserDefaults standardUserDefaults] integerForKey:@"musicstatus"];
+    if(gMusicStatus != 1)
+    {
+       [ob playMusic];
+    }
+  
+   
     
-    musicPlayer *ob = [musicPlayer sharedInstance];
-    [ob playMusic];
+    NSInteger gStatus = [[NSUserDefaults standardUserDefaults] integerForKey:@"gamestatus"];
+    
+    if(gStatus == 1)
+    {
+        [self.gameStatus setTitle:@"Resume" forState:UIControlStateNormal];
+    }
     
    }
 
@@ -55,10 +67,11 @@
     {
         [self.button setTitle:@"Stop" forState:UIControlStateNormal];
         [ob playMusic];
+        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"musicstatus"];
     }
     
     else
-    {
+    {   [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"musicstatus"];
         [self.button setTitle:@"Play Music" forState:UIControlStateNormal];
         [ob stopMusic];
     }

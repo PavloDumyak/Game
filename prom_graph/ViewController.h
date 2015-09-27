@@ -20,5 +20,6 @@
 @property  AVAudioPlayer *audioPlayer;
 @property (nonatomic, assign) NSUserDefaults *prefs;
 @property (weak, nonatomic) IBOutlet UIButton *button;
+@property (weak, nonatomic) IBOutlet UIButton *gameStatus;
 @end
 

@@ -12,4 +12,5 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MusicPlayer.h"
 @interface FigureController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *point;
 @end

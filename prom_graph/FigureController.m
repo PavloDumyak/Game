@@ -89,11 +89,24 @@ static NSInteger const kNumberOfFigures = 10;
     [self startAllTimers];
     [self startAnimalTimer];
     
-    self.score=0;
+    
     self.gameOverLable.hidden = YES;
+    self.point.hidden = YES;
     self.timeForANewAnimal = 2.0f;
     self.myActiveBackground.image = [UIImage imageNamed:@"1.jpg"];
     
+   
+    
+   if ([[NSUserDefaults standardUserDefaults] integerForKey:@"gamestatus"]==1)
+   {
+       self.score =  [[NSUserDefaults standardUserDefaults] integerForKey:@"gamescore"];
+       NSString *tmp = [NSString stringWithFormat:@"%li",(long)self.score];
+       self.visualScore.text = tmp;
+   }
+   else
+   {
+       self.score = 0;
+   }
     
 }
 
@@ -413,6 +426,14 @@ static NSInteger const kNumberOfFigures = 10;
         [self.contView removeFromSuperview];
         [self.chosenView removeFromSuperview];
         self.score++;
+        
+        self.point.hidden = NO;
+       
+        self.point.center = self.chosenView.center;
+        
+        self.point.textColor = [UIColor redColor];
+        [UIView animateWithDuration:2 animations:^{self.point.center = CGPointMake(self.chosenView.center.x, 0);}];
+       // self.point.hidden = YES;
         NSString *tmp = [NSString stringWithFormat:@"%li",(long)self.score];
         self.visualScore.text = tmp;
         [self playMusic:0];
@@ -682,8 +703,18 @@ static NSInteger const kNumberOfFigures = 10;
 }
 - (IBAction)stopMusicPlaying:(id)sender
 {
+    NSInteger musicStatus =1;
+    [[NSUserDefaults standardUserDefaults] setInteger:musicStatus forKey:@"musicstatus"];
     musicPlayer *ob = [musicPlayer sharedInstance];
     [ob stopMusic];
+    
+}
+- (IBAction)gamePause:(id)sender
+{
+    int gameStatus = 1;
+    [[NSUserDefaults standardUserDefaults] setInteger:gameStatus forKey:@"gamestatus"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.score forKey:@"gamescore"];
+    [self performSegueWithIdentifier:@"goHome" sender:nil];
     
 }
 
@@ -697,7 +728,7 @@ static NSInteger const kNumberOfFigures = 10;
     self.view.userInteractionEnabled = NO;
     self.gameOverLable.hidden = NO;
     [self.view bringSubviewToFront:self.gameOverLable];
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"gamestatus"];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do you wanna save score?"
                                                     message:@"Write player's name"
                                                    delegate:self
